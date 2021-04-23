@@ -3,19 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from '@src/app/app-routing.module';
 import { AppComponent } from '@src/app/app.component';
-import { HomeComponent } from '@src/app/home/home.component';
+import {HttpClientModule} from '@angular/common/http';
+import {declarations} from '@src/app/global/module/declarations';
+import {providers} from '@src/app/global/module/providers';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-  ],
+  declarations: declarations,
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: providers,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

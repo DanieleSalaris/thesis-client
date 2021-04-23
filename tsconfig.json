@@ -9,7 +9,6 @@
       "declaration": false,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "noEmitHelpers": true,
       "noEmitOnError": true,
       "skipLibCheck": true,
       "lib": [
