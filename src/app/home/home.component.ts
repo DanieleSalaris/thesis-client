@@ -15,7 +15,18 @@ export class HomeComponent implements OnInit {
   }
 
   login() {
-    this.authService.login('001', '12345678');
+    this.authService.login('002', '12345678')
+      .subscribe(
+        () => {},
+        error => console.error(error)
+      );
+
+    // this.authService.tryToken();
+  }
+
+  readToken() {
+    const token = this.authService.readToken();
+    console.log(token);
   }
 
   get() {
