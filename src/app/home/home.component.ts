@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '@src/app/auth/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,10 @@ import {AuthService} from '@src/app/auth/auth.service';
 export class HomeComponent implements OnInit {
   title = 'thesis-client';
 
-  constructor(private  authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
   }
@@ -31,5 +35,10 @@ export class HomeComponent implements OnInit {
 
   get() {
     this.authService.get();
+  }
+
+  goToQuestion() {
+    this.router.navigate(['question'])
+      .catch();
   }
 }
