@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 export class MobileInterceptorTns implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // substitute server url mobile requests @todo take from env
-    const url = req.url.replace('API/', 'https://14e04a997123.ngrok.io/api/');
+    const url = req.url.replace('API/', 'https://54d839e8b5dc.ngrok.io/api/');
     const updatedRequest = req.clone({url});
     return next.handle(updatedRequest);
   }

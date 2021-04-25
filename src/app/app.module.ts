@@ -6,6 +6,7 @@ import { AppComponent } from '@src/app/app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {declarations} from '@src/app/global/module/declarations';
 import {providers} from '@src/app/global/module/providers';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {providers} from '@src/app/global/module/providers';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: providers,
   bootstrap: [AppComponent]

@@ -1,6 +1,20 @@
-<StackLayout>
+<StackLayout class="root">
   <Button
-    text="back"
+    text="backz"
     (tap)="goBack()"
   ></Button>
+
+  <ScrollView class="scroll">
+    <StackLayout class="scroll-content">
+      <FlexboxLayout class="scroll-flexbox">
+        <app-question-choice
+          [label]="selectedQuestion?.label"
+          [minNumberOfChoices]="selectedQuestion?.minNumberOfChoices"
+          [maxNumberOfChoices]="selectedQuestion?.maxNumberOfChoices"
+          [hasOtherOption]="selectedQuestion?.hasOtherOption"
+          [options]="selectedQuestion?.options"
+        ></app-question-choice>
+      </FlexboxLayout>
+    </StackLayout>
+  </ScrollView>
 </StackLayout>

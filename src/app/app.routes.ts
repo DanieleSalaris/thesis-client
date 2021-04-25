@@ -6,7 +6,7 @@ import {QuestionComponent} from '@src/app/survey/question/question.component';
 export const routes: Routes = [
   {
       path: '',
-      redirectTo: '/home',
+      redirectTo: '/question',
       pathMatch: 'full',
   },
   {

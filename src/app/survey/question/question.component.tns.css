@@ -1,0 +1,26 @@
+.root {
+  background-color: #fdfdfd;
+  height: 100%;
+}
+
+.scroll {
+  height: 100%;
+}
+
+.scroll-content {
+  padding-top: 30px;
+  padding-bottom: 100px;
+}
+
+.scroll-flexbox {
+  border-radius: 8px;
+  width: 80%;
+  padding: 30px 20px;
+  background-color: #fff;
+  color: black;
+  android-elevation: 2;
+}
+
+.question-label {
+  font-size: 16px;
+}
