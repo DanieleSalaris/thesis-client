@@ -1,7 +1,5 @@
 <StackLayout [formGroup]="formGroup">
   <Label class="question-label" [text]="label" textWrap="true"></Label>
-  <TextField formControlName="text1" hint="text1"></TextField>
-  <TextField formControlName="text2" hint="text2"></TextField>
   <StackLayout class="checkboxes-container" *ngFor="let control of checkBoxesControl.controls; let i=index;">
     <CheckBox
       [text]="options[i].label"

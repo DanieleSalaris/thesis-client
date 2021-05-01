@@ -16,8 +16,6 @@ export class QuestionChoiceComponent {
   @Input() set options(value: {label: string}[]) {
     this._options = value;
 
-    console.log('formArray:', this.checkBoxesControl.controls);
-
     while (this.checkBoxesControl.controls.length < value.length) {
       this.checkBoxesControl.push(
         this.fb.control(false)

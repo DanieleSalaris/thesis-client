@@ -1,0 +1,23 @@
+.question-label {
+  margin-bottom: 40px;
+}
+
+CheckBox {
+  margin-bottom: 0px;
+}
+
+Button {
+  margin-top: 60px;
+}
+
+.sub-question-container {
+  margin-bottom: 80px;
+}
+
+.sub-question {
+  font-size: 14px;
+}
+
+.checkboxes-container {
+  padding-top: 20px;
+}

@@ -7,6 +7,7 @@
   <ScrollView class="scroll">
     <StackLayout class="scroll-content">
       <FlexboxLayout class="scroll-flexbox">
+        <!--
         <app-question-choice
           [label]="selectedQuestion?.label"
           [minNumberOfChoices]="selectedQuestion?.minNumberOfChoices"
@@ -14,6 +15,13 @@
           [hasOtherOption]="selectedQuestion?.hasOtherOption"
           [options]="selectedQuestion?.options"
         ></app-question-choice>
+        -->
+        <app-question-array
+          [label]="arrayQuestion?.label"
+          [minNumberOfChoices]="arrayQuestion?.minNumberOfChoices"
+          [maxNumberOfChoices]="arrayQuestion?.maxNumberOfChoices"
+          [optionsAndSubQuestions]="{subQuestions: arrayQuestion?.subQuestion, options: arrayQuestion?.options}"
+        ></app-question-array>
       </FlexboxLayout>
     </StackLayout>
   </ScrollView>

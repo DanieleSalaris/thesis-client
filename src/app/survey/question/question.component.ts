@@ -4,6 +4,7 @@ import {SurveyService} from '@src/app/survey/survey.service';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
 import {QuestionChoiceModel} from '@src/app/survey/choice/question-choice.model';
+import {QuestionArrayModel} from '@src/app/survey/array/question-array.model';
 
 @Component({
   selector: 'app-question',
@@ -13,6 +14,7 @@ import {QuestionChoiceModel} from '@src/app/survey/choice/question-choice.model'
 export class QuestionComponent implements OnInit{
   survey$: Observable<any>;
   selectedQuestion: QuestionChoiceModel;
+  arrayQuestion: QuestionArrayModel;
 
   constructor(
     private surveyService: SurveyService,
@@ -23,10 +25,11 @@ export class QuestionComponent implements OnInit{
     this.survey$ = this.surveyService.getSurvey();
     this.survey$
       .pipe(
-        tap(res => this.selectedQuestion = new QuestionChoiceModel(res?.questions?.[0]?.data ?? {}))
+        tap(res => this.arrayQuestion = new QuestionArrayModel(res?.questions?.[2]?.data ?? {})),
+        tap(res => this.selectedQuestion = new QuestionChoiceModel(res?.questions?.[0]?.data ?? {})),
       )
       .subscribe(
-      res => console.log(this.selectedQuestion),
+      // res => console.log(this.selectedQuestion),
       // error => console.log(error)
     );
   }
