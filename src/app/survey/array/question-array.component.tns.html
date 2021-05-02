@@ -13,10 +13,20 @@
     <Label class="sub-question" [text]="optionsAndSubQuestions.subQuestions[j].label"></Label>
     <StackLayout class="checkboxes-container" *ngFor="let control of getControlsFromSubQuestion(subQuestion); let i=index">
       <CheckBox
+        *ngIf="singleChoice"
         [text]="optionsAndSubQuestions.options[i].label"
         [checked]="control.value"
-        (checkedChange)="toggleCheckbox($event.value, control)"
+        (checkedChange)="toggleCheckbox($event.value, control, subQuestion)"
+        boxType="circle"
       ></CheckBox>
+      <CheckBox
+        *ngIf="!singleChoice"
+        [text]="optionsAndSubQuestions.options[i].label"
+        [checked]="control.value"
+        (checkedChange)="toggleCheckbox($event.value, control, subQuestion)"
+        boxType="square"
+      ></CheckBox>
+      <!-- isUserInteractionEnabled="false" -->
     </StackLayout>
   </StackLayout>
   <Button text="Submit" (tap)="submit()"></Button>

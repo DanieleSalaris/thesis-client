@@ -9,10 +9,14 @@ import {AbstractControl, FormArray, FormBuilder} from '@angular/forms';
 export class QuestionArrayComponent {
   @Input() label: string;
   @Input() minNumberOfChoices: number;
-  @Input() maxNumberOfChoices: number;
+
+  @Input() set maxNumberOfChoices(value: number) {
+    this._maxNumberOfChoices = value;
+    this.singleChoice = true; // value === 1;
+  }
+
   @Input() hasOtherOption: boolean;
 
-  private _optionsAndSubQuestions;
   @Input() set optionsAndSubQuestions(value: {options: {label: string}[], subQuestions: {label: string}[]}) {
     this._optionsAndSubQuestions = value;
 
@@ -41,10 +45,6 @@ export class QuestionArrayComponent {
     // }
   }
 
-  get optionsAndSubQuestions() {
-    return this._optionsAndSubQuestions;
-  }
-
   get checkBoxesControl() {
     return this.formGroup.get('checkBoxesControl') as FormArray;
   }
@@ -52,6 +52,19 @@ export class QuestionArrayComponent {
   formGroup = this.fb.group({
     checkBoxesControl: this.fb.array([])
   });
+
+
+  get maxNumberOfChoices(): number {
+    return this._maxNumberOfChoices;
+  }
+
+  get optionsAndSubQuestions() {
+    return this._optionsAndSubQuestions;
+  }
+
+  private _optionsAndSubQuestions;
+  private _maxNumberOfChoices: number;
+  singleChoice: boolean;
 
   constructor(private fb: FormBuilder) {}
 
@@ -63,10 +76,24 @@ export class QuestionArrayComponent {
       (subQuestion: FormArray) => subQuestion.controls.map(c => c.value)
     );
 
-    console.log(values);
   }
 
-  toggleCheckbox(value: boolean, control: AbstractControl) {
+  toggleCheckbox(value: boolean, control: AbstractControl, subQuestion: AbstractControl) {
+    if (!this.singleChoice) { // multiple choice
+      control.setValue(value);
+      return;
+    }
+
+    if (!value) {
+      return;
+    }
+
+    const controls = this.getControlsFromSubQuestion(subQuestion);
+
+    controls.map(c => {
+        c.setValue(false);
+    });
+
     control.setValue(value);
   }
 
