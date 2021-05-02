@@ -16,12 +16,20 @@
           [options]="selectedQuestion?.options"
         ></app-question-choice>
         -->
+        <!--
         <app-question-array
           [label]="arrayQuestion?.label"
           [minNumberOfChoices]="arrayQuestion?.minNumberOfChoices"
           [maxNumberOfChoices]="arrayQuestion?.maxNumberOfChoices"
           [optionsAndSubQuestions]="{subQuestions: arrayQuestion?.subQuestion, options: arrayQuestion?.options}"
         ></app-question-array>
+        -->
+        <app-question-input
+          [type]="inputQuestion?.type"
+          [label]="inputQuestion?.label"
+          [minLength]="inputQuestion?.minLength"
+          [maxLength]="inputQuestion?.maxLength"
+        ></app-question-input>
       </FlexboxLayout>
     </StackLayout>
   </ScrollView>
