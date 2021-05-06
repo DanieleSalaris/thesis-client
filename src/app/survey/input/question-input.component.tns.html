@@ -3,6 +3,10 @@
   <TextField
     formControlName=""
   ></TextField>
+  <FlexboxLayout class="button-container">
+    <Button text="prev" (tap)="onPrevQuestion()"></Button>
+    <Button text="next" (tap)="onNextQuestion()"></Button>
+  </FlexboxLayout>
   <!--
   <StackLayout class="checkboxes-container" *ngFor="let control of checkBoxesControl.controls; let i=index;">
     <CheckBox

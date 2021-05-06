@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder} from '@angular/forms';
 
 @Component({
@@ -7,6 +7,9 @@ import {AbstractControl, FormArray, FormBuilder} from '@angular/forms';
   styleUrls: ['./question-array.component.css', '../question/question.component.css']
 })
 export class QuestionArrayComponent {
+  @Output() nextQuestion = new EventEmitter();
+  @Output() prevQuestion = new EventEmitter();
+
   @Input() label: string;
   @Input() minNumberOfChoices: number;
 
@@ -99,5 +102,13 @@ export class QuestionArrayComponent {
 
   getControlsFromSubQuestion(subQuestion: AbstractControl) {
     return (subQuestion as FormArray).controls;
+  }
+
+  onNextQuestion () {
+    this.nextQuestion.emit();
+  }
+
+  onPrevQuestion () {
+    this.prevQuestion.emit();
   }
 }

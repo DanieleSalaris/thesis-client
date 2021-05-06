@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {max} from 'rxjs/operators';
 
@@ -7,8 +7,10 @@ import {max} from 'rxjs/operators';
   templateUrl: './question-input.component.html',
   styleUrls: ['./question-input.component.css', '../question/question.component.css']
 }) export class QuestionInputComponent {
-  @Input() label: string;
+  @Output() nextQuestion = new EventEmitter();
+  @Output() prevQuestion = new EventEmitter();
 
+  @Input() label: string;
   @Input() set textConfigValues(value) {
     const {
       type,
@@ -42,4 +44,12 @@ import {max} from 'rxjs/operators';
   formGroup = this.fb.group({});
 
   constructor(private fb: FormBuilder) {}
+
+  onNextQuestion () {
+    this.nextQuestion.emit();
+  }
+
+  onPrevQuestion () {
+    this.prevQuestion.emit();
+  }
 }

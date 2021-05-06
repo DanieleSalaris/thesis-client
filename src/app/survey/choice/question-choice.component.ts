@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl} from '@angular/forms';
 
 @Component({
@@ -7,6 +7,9 @@ import {AbstractControl, FormArray, FormBuilder, FormControl} from '@angular/for
   styleUrls: ['./question-choice.component.css', '../question/question.component.css']
 })
 export class QuestionChoiceComponent {
+  @Output() nextQuestion = new EventEmitter();
+  @Output() prevQuestion = new EventEmitter();
+
   @Input() label: string;
   @Input() minNumberOfChoices: number;
   @Input() maxNumberOfChoices: number;
@@ -72,5 +75,13 @@ export class QuestionChoiceComponent {
     console.log(i);
     console.log(this.options[i]);
     console.log('---');
+  }
+
+  onNextQuestion () {
+    this.nextQuestion.emit();
+  }
+
+  onPrevQuestion () {
+    this.prevQuestion.emit();
   }
 }

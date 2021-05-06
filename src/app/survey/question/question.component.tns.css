@@ -24,3 +24,8 @@
 .question-label {
   font-size: 16px;
 }
+
+.button-container {
+  flex-direction: row;
+  justify-content: space-between;
+}

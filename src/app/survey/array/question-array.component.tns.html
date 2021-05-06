@@ -29,5 +29,8 @@
       <!-- isUserInteractionEnabled="false" -->
     </StackLayout>
   </StackLayout>
-  <Button text="Submit" (tap)="submit()"></Button>
+  <FlexboxLayout class="button-container">
+    <Button text="prev" (tap)="onPrevQuestion()"></Button>
+    <Button text="next" (tap)="onNextQuestion()"></Button>
+  </FlexboxLayout>
 </StackLayout>

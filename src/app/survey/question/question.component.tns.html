@@ -7,28 +7,35 @@
   <ScrollView class="scroll">
     <StackLayout class="scroll-content">
       <FlexboxLayout class="scroll-flexbox">
-        <!--
         <app-question-choice
-          [label]="selectedQuestion?.label"
+          *ngIf="selectedQuestionType=== 'choice'"
+          [label]="selectedQuestion?.data?.label"
+          [minNumberOfChoices]="selectedQuestion.minNumberOfChoices"
+          [maxNumberOfChoices]="selectedQuestion.maxNumberOfChoices"
+          [hasOtherOption]="selectedQuestion.hasOtherOption"
+          [options]="selectedQuestion?.options"
+          (nextQuestion)="nextQuestion()"
+          (prevQuestion)="prevQuestion()"
+        ></app-question-choice>
+        <app-question-array
+          *ngIf="selectedQuestionType === 'array'"
+          [label]="arrayQuestion?.label"
           [minNumberOfChoices]="selectedQuestion?.minNumberOfChoices"
           [maxNumberOfChoices]="selectedQuestion?.maxNumberOfChoices"
-          [hasOtherOption]="selectedQuestion?.hasOtherOption"
-          [options]="selectedQuestion?.options"
-        ></app-question-choice>
-        -->
-        <!--
-        <app-question-array
-          [label]="arrayQuestion?.label"
-          [minNumberOfChoices]="arrayQuestion?.minNumberOfChoices"
-          [maxNumberOfChoices]="arrayQuestion?.maxNumberOfChoices"
-          [optionsAndSubQuestions]="{subQuestions: arrayQuestion?.subQuestion, options: arrayQuestion?.options}"
+          [optionsAndSubQuestions]="{subQuestions: selectedQuestion?.subQuestion, options: selectedQuestion?.options}"
+          (nextQuestion)="nextQuestion()"
+          (prevQuestion)="prevQuestion()"
         ></app-question-array>
-        -->
         <app-question-input
-          [type]="inputQuestion?.type"
-          [label]="inputQuestion?.label"
-          [minLength]="inputQuestion?.minLength"
-          [maxLength]="inputQuestion?.maxLength"
+          *ngIf="selectedQuestionType === 'input'"
+          [label]="selectedQuestion?.label"
+          [textConfigValues]="{
+            type: selectedQuestion?.type,
+            minLength: selectedQuestion?.minLength,
+            maxLength: selectedQuestion?.maxLength
+          }"
+          (nextQuestion)="nextQuestion()"
+          (prevQuestion)="prevQuestion()"
         ></app-question-input>
       </FlexboxLayout>
     </StackLayout>
