@@ -1,0 +1,17 @@
+<StackLayout [formGroup]="formGroup">
+  <Label class="question-label" [text]="label" textWrap="true"></Label>
+  <TextField
+    formControlName=""
+  ></TextField>
+  <!--
+  <StackLayout class="checkboxes-container" *ngFor="let control of checkBoxesControl.controls; let i=index;">
+    <CheckBox
+      [text]="options[i].label"
+      [checked]="control.value"
+      (checkedChange)="toggleCheckbox($event.value, control, i)"
+    ></CheckBox>
+  </StackLayout>
+  <Button text="Submit" (tap)="submit()"></Button>
+  -->
+
+</StackLayout>
