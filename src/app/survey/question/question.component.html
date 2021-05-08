@@ -1,0 +1,34 @@
+<div class="root">
+  <div class="card question-container">
+    <app-question-choice
+      *ngIf="selectedQuestionType=== 'choice'"
+      [label]="selectedQuestion?.data?.label"
+      [minNumberOfChoices]="selectedQuestion.minNumberOfChoices"
+      [maxNumberOfChoices]="selectedQuestion.maxNumberOfChoices"
+      [hasOtherOption]="selectedQuestion.hasOtherOption"
+      [options]="selectedQuestion?.options"
+      (nextQuestion)="nextQuestion()"
+      (prevQuestion)="prevQuestion()"
+    ></app-question-choice>
+    <app-question-array
+      *ngIf="selectedQuestionType === 'array'"
+      [label]="arrayQuestion?.label"
+      [minNumberOfChoices]="selectedQuestion?.minNumberOfChoices"
+      [maxNumberOfChoices]="selectedQuestion?.maxNumberOfChoices"
+      [optionsAndSubQuestions]="{subQuestions: selectedQuestion?.subQuestion, options: selectedQuestion?.options}"
+      (nextQuestion)="nextQuestion()"
+      (prevQuestion)="prevQuestion()"
+    ></app-question-array>
+    <app-question-input
+      *ngIf="selectedQuestionType === 'input'"
+      [label]="selectedQuestion?.label"
+      [textConfigValues]="{
+              type: selectedQuestion?.type,
+              minLength: selectedQuestion?.minLength,
+              maxLength: selectedQuestion?.maxLength
+            }"
+      (nextQuestion)="nextQuestion()"
+      (prevQuestion)="prevQuestion()"
+    ></app-question-input>
+  </div>
+</div>

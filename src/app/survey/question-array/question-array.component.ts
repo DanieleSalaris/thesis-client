@@ -15,7 +15,7 @@ export class QuestionArrayComponent {
 
   @Input() set maxNumberOfChoices(value: number) {
     this._maxNumberOfChoices = value;
-    this.singleChoice = true; // value === 1;
+    this.singleChoice = value === 1;
   }
 
   @Input() hasOtherOption: boolean;

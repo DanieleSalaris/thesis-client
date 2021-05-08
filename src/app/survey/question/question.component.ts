@@ -3,16 +3,16 @@ import {Observable} from 'rxjs';
 import {SurveyService} from '@src/app/survey/survey.service';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
-import {QuestionChoiceModel} from '@src/app/survey/choice/question-choice.model';
-import {QuestionArrayModel} from '@src/app/survey/array/question-array.model';
-import {QuestionInputModel} from '@src/app/survey/input/question-input.model';
+import {QuestionChoiceModel} from '@src/app/survey/question-choice/question-choice.model';
+import {QuestionArrayModel} from '@src/app/survey/question-array/question-array.model';
+import {QuestionInputModel} from '@src/app/survey/question-input/question-input.model';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent implements OnInit{
+export class QuestionComponent implements OnInit {
   survey$: Observable<any>;
   // selectedQuestion: QuestionChoiceModel;
   arrayQuestion: QuestionArrayModel;
