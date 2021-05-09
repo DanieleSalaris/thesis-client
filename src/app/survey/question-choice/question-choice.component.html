@@ -1,5 +1,17 @@
 <div>
   Question choice
+  <ul [formGroup]="formGroup">
+    <li *ngFor="let control of checkBoxesControl.controls; let i=index">
+      <mat-checkbox
+        [checked]="control.value"
+        (change)="toggleCheckbox($event.checked, control)"
+      >
+      </mat-checkbox>
+      <div class="checkbox-label">
+        {{getOptionLabelFromIndex(i)}}
+      </div>
+    </li>
+  </ul>
   <app-confirm-buttons
     (next)="onNextQuestion()"
     (prev)="onPrevQuestion()"

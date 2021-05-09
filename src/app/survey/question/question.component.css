@@ -9,12 +9,7 @@
 }
 
 .question-container {
-  width: 200px;
-  height: 200px;
+  min-width: 300px;
   padding: 30px 40px;
 }
 
-.button-row {
-  display: flex;
-  justify-content: space-between;
-}

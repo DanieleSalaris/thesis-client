@@ -69,6 +69,14 @@ export class QuestionArrayComponent {
   private _maxNumberOfChoices: number;
   singleChoice: boolean;
 
+  get options() {
+    return this.optionsAndSubQuestions.options;
+  }
+
+  get subQuestions() {
+    return this.optionsAndSubQuestions.subQuestions;
+  }
+
   constructor(private fb: FormBuilder) {}
 
   submit() {
@@ -110,5 +118,9 @@ export class QuestionArrayComponent {
 
   onPrevQuestion () {
     this.prevQuestion.emit();
+  }
+
+  getSubQuestion(index: number) {
+    return this.optionsAndSubQuestions.subQuestions[index].label;
   }
 }

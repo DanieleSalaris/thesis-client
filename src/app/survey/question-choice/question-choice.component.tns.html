@@ -4,7 +4,7 @@
     <CheckBox
       [text]="options[i].label"
       [checked]="control.value"
-      (checkedChange)="toggleCheckbox($event.value, control, i)"
+      (checkedChange)="toggleCheckbox($event.value, control)"
     ></CheckBox>
   </StackLayout>
   <FlexboxLayout class="button-container">

@@ -1,0 +1,23 @@
+table {
+  margin-top: 24px;
+  margin-bottom: 50px;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 20px 10px;
+}
+
+th {
+  color: #777;
+  font-weight: normal;
+}
+
+td {
+  border-top: 1px solid #ccc;
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+}

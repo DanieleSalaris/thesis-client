@@ -1,5 +1,27 @@
 <div>
   Question array
+  <table>
+    <tr>
+      <th></th>
+      <th *ngFor="let option of options">
+        {{option.label}}
+      </th>
+    </tr>
+    <tr *ngFor="let subQuestion of checkBoxesControl.controls; let rowIndex=index">
+      <td>
+        {{getSubQuestion(rowIndex)}}
+      </td>
+      <td *ngFor="let control of getControlsFromSubQuestion(subQuestion); let i=index">
+        <div class="checkbox-container">
+          <mat-checkbox
+            class="checkbox"
+            [checked]="control.value"
+            (change)="toggleCheckbox($event.checked, control, subQuestion)"
+          ></mat-checkbox>
+        </div>
+      </td>
+    </tr>
+  </table>
   <app-confirm-buttons
     (next)="onNextQuestion()"
     (prev)="onPrevQuestion()"

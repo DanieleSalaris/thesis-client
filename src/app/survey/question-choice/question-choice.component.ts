@@ -69,12 +69,8 @@ export class QuestionChoiceComponent {
     console.log(this.checkBoxesControl.controls.map(c => c.value));
   }
 
-  toggleCheckbox(value: boolean, control: AbstractControl, i) {
+  toggleCheckbox(value: boolean, control: AbstractControl) {
     control.setValue(value);
-    console.log('***');
-    console.log(i);
-    console.log(this.options[i]);
-    console.log('---');
   }
 
   onNextQuestion () {
@@ -83,5 +79,13 @@ export class QuestionChoiceComponent {
 
   onPrevQuestion () {
     this.prevQuestion.emit();
+  }
+
+  getOptionLabelFromIndex(index: number): string {
+    return this.options[index].label;
+  }
+
+  log(value: any) {
+    console.log(value);
   }
 }
