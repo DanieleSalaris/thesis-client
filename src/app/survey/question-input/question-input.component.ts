@@ -20,7 +20,7 @@ import {max} from 'rxjs/operators';
 
     if (this.type !== type || this.minLength !== minLength || this.maxLength !== maxLength) { // changed values
       this.formGroup = this.fb.group({
-        value: this.fb.control([[''], [Validators.required, Validators.minLength(minLength), Validators.maxLength(maxLength)]])
+        value: ['', Validators.required, Validators.minLength(minLength), Validators.maxLength(maxLength)]
       });
     }
 
@@ -41,7 +41,13 @@ import {max} from 'rxjs/operators';
   private minLength: number;
   private maxLength: number;
 
-  formGroup = this.fb.group({});
+  formGroup = this.fb.group({
+    value: this.fb.control([['']])
+  });
+
+  get valueControl() {
+    return this.formGroup.get('value');
+  }
 
   constructor(private fb: FormBuilder) {}
 

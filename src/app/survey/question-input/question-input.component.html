@@ -1,8 +1,10 @@
 <div>
   Question input
-  <div class="form" [formGroup]="formGroup">
-
-  </div>
+  <form class="form" [formGroup]="formGroup">
+    <mat-form-field>
+      <input matInput [formControl]="valueControl" type="text">
+    </mat-form-field>
+  </form>
   <app-confirm-buttons
     (next)="onNextQuestion()"
     (prev)="onPrevQuestion()"
