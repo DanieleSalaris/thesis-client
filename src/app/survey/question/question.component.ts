@@ -87,7 +87,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
       .catch();
   }
 
-  nextQuestion() {
+  nextQuestion(value) {
+    console.log('value', value);
     if (this.selectedQuestionIndex >= this.question.length - 1) {
       return;
     }

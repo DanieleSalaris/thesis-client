@@ -14,7 +14,7 @@
           [maxNumberOfChoices]="selectedQuestion.maxNumberOfChoices"
           [hasOtherOption]="selectedQuestion.hasOtherOption"
           [options]="selectedQuestion?.options"
-          (nextQuestion)="nextQuestion()"
+          (nextQuestion)="nextQuestion($event)"
           (prevQuestion)="prevQuestion()"
         ></app-question-choice>
         <app-question-array

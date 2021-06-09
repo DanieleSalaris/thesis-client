@@ -5,10 +5,11 @@
       [text]="options[i].label"
       [checked]="control.value"
       (checkedChange)="toggleCheckbox($event.value, control)"
+      [isUserInteractionEnabled]="!disableCheckBoxes || control.value"
     ></CheckBox>
   </StackLayout>
-  <FlexboxLayout class="button-container">
-    <Button text="prev" (tap)="onPrevQuestion()"></Button>
-    <Button text="next" (tap)="onNextQuestion()"></Button>
-  </FlexboxLayout>
+  <app-confirm-buttons
+    (next)="onNextQuestion()"
+    (prev)="onPrevQuestion()"
+  ></app-confirm-buttons>
 </StackLayout>

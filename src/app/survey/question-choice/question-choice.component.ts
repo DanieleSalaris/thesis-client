@@ -1,21 +1,22 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl} from '@angular/forms';
+import {findAll} from '@angular/compiler-cli/ngcc/src/utils';
 
 @Component({
   selector: 'app-question-choice',
   templateUrl: './question-choice.component.html',
   styleUrls: ['./question-choice.component.css', '../question/question.component.css']
 })
-export class QuestionChoiceComponent {
+export class QuestionChoiceComponent implements OnInit {
   @Output() nextQuestion = new EventEmitter();
   @Output() prevQuestion = new EventEmitter();
 
   @Input() label: string;
   @Input() minNumberOfChoices: number;
-  @Input() maxNumberOfChoices: number;
+  @Input() maxNumberOfChoices = 2;
   @Input() hasOtherOption: boolean;
 
-  _options;
+  private _options;
   @Input() set options(value: {label: string}[]) {
     this._options = value;
 
@@ -31,50 +32,66 @@ export class QuestionChoiceComponent {
     return this._options;
   }
 
-  label2 = 'default label';
-
-  get text1Control() {
-    return this.formGroup.get('text1');
-  }
-
-  get text2Control() {
-    return this.formGroup.get('text2');
-  }
-
-  get checkBox1Control() {
-    return this.formGroup.get('checkbox1');
-  }
-
   get checkBoxesControl() {
     return this.formGroup.get('checkBoxesControl') as FormArray;
   }
 
   formGroup = this.fb.group({
-    text1: ['text1'],
-    text2: ['text2'],
-    checkbox1: [false],
     checkBoxesControl: this.fb.array([])
   });
 
+  disableCheckBoxes = false;
+
+  private _numberOfTrueValues = 0;
+  set numberOfTrueValues(value) {
+    this._numberOfTrueValues = value;
+    this.disableCheckBoxes = value >= this.maxNumberOfChoices;
+  }
+
+  get numberOfTrueValues() {
+    return this._numberOfTrueValues;
+  }
+
+  errorMessage = '';
+
   constructor(private fb: FormBuilder) {}
 
-  submit() {
-    // console.log(this.text1Control.value, this.text2Control.value);
-    console.log('on submit');
-    // this.label2 = 'changed label';
+  ngOnInit() {
+    this.numberOfTrueValues = this.countTrueValues();
+  }
 
-    console.log(this.text1Control.value);
-    console.log(this.text2Control.value);
-    console.log(this.checkBox1Control.value);
-    console.log(this.checkBoxesControl.controls.map(c => c.value));
+  validateForm(): boolean {
+    const numberOfTrueValues = this.countTrueValues();
+    this.errorMessage = '';
+
+    if (numberOfTrueValues < this.minNumberOfChoices) {
+      this.errorMessage =  `Insert at least ${this.minNumberOfChoices} options`;
+      return false;
+    }
+
+    if (numberOfTrueValues > this.maxNumberOfChoices) {
+      this.errorMessage = `Insert at most ${this.maxNumberOfChoices} options`;
+      return false;
+    }
+
+    return true;
   }
 
   toggleCheckbox(value: boolean, control: AbstractControl) {
     control.setValue(value);
+    this.numberOfTrueValues = this.countTrueValues();
   }
 
   onNextQuestion () {
-    this.nextQuestion.emit();
+    const validForm = this.validateForm();
+
+    console.log('valid form', validForm);
+    if (!validForm) {
+      return;
+    }
+
+    const output = this.formatOutput();
+    this.nextQuestion.emit(output);
   }
 
   onPrevQuestion () {
@@ -85,7 +102,21 @@ export class QuestionChoiceComponent {
     return this.options[index].label;
   }
 
-  log(value: any) {
-    console.log(value);
+  countTrueValues() {
+    return this.checkBoxesControl.controls.reduce((acc:  number, control) => {
+      if (control.value) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+  }
+
+  formatOutput() {
+    return this.checkBoxesControl.controls.reduce((acc: number[], control, index) => {
+      if (control.value) {
+        return [...acc, index];
+      }
+      return acc;
+    }, []);
   }
 }
