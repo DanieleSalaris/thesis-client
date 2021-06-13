@@ -26,6 +26,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   // selectedQuestion: {type: string, data: QuestionChoiceModel | QuestionArrayModel | QuestionInputModel};
   selectedQuestion: QuestionChoiceModel | QuestionArrayModel | QuestionInputModel;
   selectedQuestionType: string;
+  selectedQuestionId: string;
+  instanceId = '2';
 
   private _selectedQuestionIndex;
   set selectedQuestionIndex(value) {
@@ -42,6 +44,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     const question = this.question[value];
     this.selectedQuestionType = question.type;
     this.selectedQuestion = question.data;
+    this.selectedQuestionId = question._id;
   }
 
   get selectedQuestionIndex() {
@@ -70,7 +73,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     //   // error => console.log(error)
     // );
 
-    this.questionSubscription = this.surveyService.getQuestionsFromInstanceId()
+    this.questionSubscription = this.surveyService.getQuestionsFromInstanceId(this.instanceId)
       .pipe(
         tap(questions => this.question = questions),
         tap(() => this.selectedQuestionIndex = 0)
@@ -88,12 +91,16 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   nextQuestion(value) {
-    console.log('value', value);
     if (this.selectedQuestionIndex >= this.question.length - 1) {
       return;
     }
 
-    this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
+    this.surveyService
+      .answerQuestion(this.instanceId, this.selectedQuestionId, value)
+      .pipe(
+        tap(() => this.selectedQuestionIndex = this.selectedQuestionIndex + 1)
+      )
+      .subscribe(res => console.log('success', res), error => console.log('error', error));
   }
 
   prevQuestion() {
