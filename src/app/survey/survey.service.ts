@@ -26,6 +26,7 @@ export class SurveyService {
     return this.http.get(
       `API/instance/${instanceId}/question`
     ).pipe(
+      // tap(res => console.log('questions', res)),
       map((questions: any[]) => questions.map(q => this.formatQuestion(q))),
     );
 
@@ -33,6 +34,10 @@ export class SurveyService {
 
   answerQuestion(instanceId, questionId, value) {
     return this.http.post(`API/instance/${instanceId}/question/${questionId}/answer`, {value});
+  }
+
+  getAnswer(instanceId, questionId) {
+    return this.http.get(`API/instance/${instanceId}/question/${questionId}/answer/`);
   }
 
   private formatQuestion(question) {

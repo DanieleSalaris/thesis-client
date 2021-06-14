@@ -14,6 +14,7 @@ import {QuestionInputModel} from '@src/app/survey/question-input/question-input.
 })
 export class QuestionComponent implements OnInit, OnDestroy {
   survey$: Observable<any>;
+  answer$: Observable<any>;
 
   // @todo change in questions
   question;
@@ -45,6 +46,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.selectedQuestionType = question.type;
     this.selectedQuestion = question.data;
     this.selectedQuestionId = question._id;
+    this.answer$ = this.surveyService.getAnswer(this.instanceId, this.selectedQuestionId);
+    this.answer$.subscribe(res => console.log('success', res), error => console.log('error', error));
   }
 
   get selectedQuestionIndex() {
@@ -101,6 +104,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
         tap(() => this.selectedQuestionIndex = this.selectedQuestionIndex + 1)
       )
       .subscribe(res => console.log('success', res), error => console.log('error', error));
+    // this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
   }
 
   prevQuestion() {

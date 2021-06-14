@@ -16,10 +16,21 @@ export class QuestionChoiceComponent implements OnInit {
   @Input() maxNumberOfChoices = 2;
   @Input() hasOtherOption: boolean;
 
+  private _startValue;
+  @Input() set startValue(value: number[]) {
+    this._startValue = value;
+    this.precompilateForm();
+  }
+
+  get startValue() {
+    return this._startValue;
+  }
+
   private _options;
   @Input() set options(value: {label: string}[]) {
     this._options = value;
 
+    this.initFormGroup();
     while (this.checkBoxesControl.controls.length < value.length) {
       this.checkBoxesControl.push(
         this.fb.control(false)
@@ -58,6 +69,7 @@ export class QuestionChoiceComponent implements OnInit {
 
   ngOnInit() {
     this.numberOfTrueValues = this.countTrueValues();
+    // this.initFormGroup();
   }
 
   validateForm(): boolean {
@@ -85,7 +97,6 @@ export class QuestionChoiceComponent implements OnInit {
   onNextQuestion () {
     const validForm = this.validateForm();
 
-    console.log('valid form', validForm);
     if (!validForm) {
       return;
     }
@@ -118,5 +129,17 @@ export class QuestionChoiceComponent implements OnInit {
       }
       return acc;
     }, []);
+  }
+
+  initFormGroup() {
+    this.formGroup = this.fb.group({
+      checkBoxesControl: this.fb.array([])
+    });
+  }
+
+  precompilateForm() {
+    // from [2, 4, 5] to [false, true, false, true, true]
+    const nextValue = this.checkBoxesControl.controls.map(() => false);
+    this.startValue.forEach(pos => nextValue[pos] = true);
   }
 }
