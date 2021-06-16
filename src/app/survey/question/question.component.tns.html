@@ -16,6 +16,7 @@
           [options]="selectedQuestion?.options"
           (nextQuestion)="nextQuestion($event)"
           (prevQuestion)="prevQuestion()"
+          [startValue]="(answer$ | async)"
         ></app-question-choice>
         <app-question-array
           *ngIf="selectedQuestionType === 'array'"
@@ -23,7 +24,7 @@
           [minNumberOfChoices]="selectedQuestion?.minNumberOfChoices"
           [maxNumberOfChoices]="selectedQuestion?.maxNumberOfChoices"
           [optionsAndSubQuestions]="{subQuestions: selectedQuestion?.subQuestion, options: selectedQuestion?.options}"
-          (nextQuestion)="nextQuestion()"
+          (nextQuestion)="nextQuestion($event)"
           (prevQuestion)="prevQuestion()"
         ></app-question-array>
         <app-question-input
@@ -34,7 +35,7 @@
             minLength: selectedQuestion?.minLength,
             maxLength: selectedQuestion?.maxLength
           }"
-          (nextQuestion)="nextQuestion()"
+          (nextQuestion)="nextQuestion($event)"
           (prevQuestion)="prevQuestion()"
         ></app-question-input>
       </FlexboxLayout>

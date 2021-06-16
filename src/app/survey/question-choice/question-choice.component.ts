@@ -16,14 +16,10 @@ export class QuestionChoiceComponent implements OnInit {
   @Input() maxNumberOfChoices = 2;
   @Input() hasOtherOption: boolean;
 
-  private _startValue;
-  @Input() set startValue(value: number[]) {
-    this._startValue = value;
+  private _startValue = [];
+  @Input() set startValue(value: {data: number[]}) {
+    this._startValue = value.data;
     this.precompilateForm();
-  }
-
-  get startValue() {
-    return this._startValue;
   }
 
   private _options;
@@ -131,15 +127,17 @@ export class QuestionChoiceComponent implements OnInit {
     }, []);
   }
 
-  initFormGroup() {
+  initFormGroup(value = []) {
     this.formGroup = this.fb.group({
-      checkBoxesControl: this.fb.array([])
+      checkBoxesControl: this.fb.array(value)
     });
   }
 
   precompilateForm() {
     // from [2, 4, 5] to [false, true, false, true, true]
     const nextValue = this.checkBoxesControl.controls.map(() => false);
-    this.startValue.forEach(pos => nextValue[pos] = true);
+    this._startValue.forEach(pos => nextValue[pos] = true);
+
+    this.initFormGroup(nextValue);
   }
 }
