@@ -7,8 +7,9 @@
       [maxNumberOfChoices]="selectedQuestion.maxNumberOfChoices"
       [hasOtherOption]="selectedQuestion.hasOtherOption"
       [options]="selectedQuestion?.options"
-      (nextQuestion)="nextQuestion()"
+      (nextQuestion)="nextQuestion($event)"
       (prevQuestion)="prevQuestion()"
+      [startValue]="(answer$ | async)"
     ></app-question-choice>
     <app-question-array
       *ngIf="selectedQuestionType === 'array'"
