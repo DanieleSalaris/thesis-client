@@ -14,6 +14,8 @@ export class QuestionArrayComponent {
   @Input() minNumberOfChoices: number;
 
   @Input() set maxNumberOfChoices(value: number) {
+
+    console.log('max number of choices', value);
     this._maxNumberOfChoices = value;
     this.singleChoice = value === 1;
   }
@@ -113,7 +115,15 @@ export class QuestionArrayComponent {
   }
 
   onNextQuestion () {
-    this.nextQuestion.emit();
+    const validForm = this.validateForm();
+
+    // if (!validForm) {
+    //   return;
+    // }
+
+    const output = this.formatOutput();
+
+    this.nextQuestion.emit(output);
   }
 
   onPrevQuestion () {
@@ -122,5 +132,37 @@ export class QuestionArrayComponent {
 
   getSubQuestion(index: number) {
     return this.optionsAndSubQuestions.subQuestions[index].label;
+  }
+
+  validateForm(): boolean {
+    return this.checkBoxesControl.controls
+      .map((c: FormArray) => this.countTrueValues(c)) // count number of true values for each subquestion
+      .map(v => v >= this.minNumberOfChoices && v <= this.maxNumberOfChoices) // check if each subquestion has valid number of answers
+      .reduce((prevValid, currValid) => {
+        // if prev not valid return false
+        if (!prevValid) {
+          return false;
+        }
+        return currValid;
+      }, true);
+  }
+
+  countTrueValues(subQuestion: FormArray): number {
+    return subQuestion.value.reduce((acc, value) => value ? acc + 1 : acc, 0);
+  }
+
+  formatOutput() {
+    return this.checkBoxesControl.value
+      .map((subQuestion: boolean[]) => {
+        return subQuestion.reduce((acc, val, index) => {
+          if (val) {
+            return [
+              ...acc,
+              index,
+            ];
+          }
+          return acc;
+        }, []);
+      });
   }
 }

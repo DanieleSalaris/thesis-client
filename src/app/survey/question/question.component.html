@@ -17,7 +17,7 @@
       [minNumberOfChoices]="selectedQuestion?.minNumberOfChoices"
       [maxNumberOfChoices]="selectedQuestion?.maxNumberOfChoices"
       [optionsAndSubQuestions]="{subQuestions: selectedQuestion?.subQuestion, options: selectedQuestion?.options}"
-      (nextQuestion)="nextQuestion()"
+      (nextQuestion)="nextQuestion($event)"
       (prevQuestion)="prevQuestion()"
     ></app-question-array>
     <app-question-input
