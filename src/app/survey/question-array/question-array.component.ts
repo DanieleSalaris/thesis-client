@@ -22,6 +22,12 @@ export class QuestionArrayComponent {
 
   @Input() hasOtherOption: boolean;
 
+  private _startValue = [[]];
+  @Input() set startValue(value: {data: number[][]}) {
+    this._startValue = value.data;
+    this.precompilateForm();
+  }
+
   @Input() set optionsAndSubQuestions(value: {options: {label: string}[], subQuestions: {label: string}[]}) {
     this._optionsAndSubQuestions = value;
 
@@ -31,15 +37,27 @@ export class QuestionArrayComponent {
       return;
     }
 
-    while (this.checkBoxesControl.controls.length < subQuestions.length) {
-      const subQuestionControl = this.fb.array([]);
-      while (subQuestionControl.controls.length < options.length) {
-        subQuestionControl.push(
-          this.fb.control(false)
-        );
+    // matrix of false [[false, false], [false, false]]
+    const initValues = [];
+    for (let i = 0; i < subQuestions.length; i++) {
+      const initRow = [];
+      for (let j = 0; j < options.length; j++) {
+        initRow[j] = false;
       }
-      this.checkBoxesControl.push(subQuestionControl);
+      initValues[i] = initRow;
     }
+
+    this.initFormGroup(initValues);
+
+    // while (this.checkBoxesControl.controls.length < subQuestions.length) {
+    //   const subQuestionControl = this.fb.array([]);
+    //   while (subQuestionControl.controls.length < options.length) {
+    //     subQuestionControl.push(
+    //       this.fb.control(false)
+    //     );
+    //   }
+    //   this.checkBoxesControl.push(subQuestionControl);
+    // }
 
     // this._options = valud;
     //
@@ -164,5 +182,32 @@ export class QuestionArrayComponent {
           return acc;
         }, []);
       });
+  }
+
+  initFormGroup(value: boolean[][]) {
+    // matrix of form array
+    this.formGroup = this.fb.group({
+      checkBoxesControl: this.fb.array(
+        value.map(row => this.fb.array(row))
+      )
+    });
+
+    // while (this.checkBoxesControl.controls.length < subQuestions.length) {
+    //   const subQuestionControl = this.fb.array([]);
+    //   while (subQuestionControl.controls.length < options.length) {
+    //     subQuestionControl.push(
+    //       this.fb.control(false)
+    //     );
+    //   }
+    //   this.checkBoxesControl.push(subQuestionControl);
+    // }
+  }
+
+  precompilateForm() {
+    // from [[2, 4], [1, 3]] to [[false, true, false, true], [true, false, true, false]]
+    const nextValue: boolean[][] = this.checkBoxesControl.value;
+    this._startValue.forEach((row: number[], rowIndex) => row.forEach(truePos => nextValue[rowIndex][truePos] = true));
+
+    this.initFormGroup(nextValue);
   }
 }

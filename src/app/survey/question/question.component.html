@@ -19,6 +19,7 @@
       [optionsAndSubQuestions]="{subQuestions: selectedQuestion?.subQuestion, options: selectedQuestion?.options}"
       (nextQuestion)="nextQuestion($event)"
       (prevQuestion)="prevQuestion()"
+      [startValue]="(answer$ | async)"
     ></app-question-array>
     <app-question-input
       *ngIf="selectedQuestionType === 'input'"

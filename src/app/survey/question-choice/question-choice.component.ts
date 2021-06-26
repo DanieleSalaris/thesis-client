@@ -13,7 +13,7 @@ export class QuestionChoiceComponent implements OnInit {
 
   @Input() label: string;
   @Input() minNumberOfChoices: number;
-  @Input() maxNumberOfChoices = 2;
+  @Input() maxNumberOfChoices: number;
   @Input() hasOtherOption: boolean;
 
   private _startValue = [];
