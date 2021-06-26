@@ -8,12 +8,14 @@ import {declarations} from '@src/app/global/module/declarations';
 import {providers} from '@src/app/global/module/providers';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '@src/app/material/material.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: declarations,
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

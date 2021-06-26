@@ -29,8 +29,9 @@
               minLength: selectedQuestion?.minLength,
               maxLength: selectedQuestion?.maxLength
             }"
-      (nextQuestion)="nextQuestion()"
+      (nextQuestion)="nextQuestion($event)"
       (prevQuestion)="prevQuestion()"
+      [startValue]="(answer$ | async)"
     ></app-question-input>
   </div>
 </div>

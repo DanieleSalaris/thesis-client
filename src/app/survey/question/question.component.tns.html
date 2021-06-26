@@ -38,6 +38,7 @@
           }"
           (nextQuestion)="nextQuestion($event)"
           (prevQuestion)="prevQuestion()"
+          [startValue]="(answer$ | async)"
         ></app-question-input>
       </FlexboxLayout>
     </StackLayout>

@@ -94,14 +94,19 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   nextQuestion(value) {
-    if (this.selectedQuestionIndex >= this.question.length - 1) {
-      return;
-    }
+    // if (this.selectedQuestionIndex >= this.question.length - 1) {
+    //   return;
+    // }
 
     this.surveyService
       .answerQuestion(this.instanceId, this.selectedQuestionId, value)
       .pipe(
-        tap(() => this.selectedQuestionIndex = this.selectedQuestionIndex + 1)
+        tap(() => {
+          if (this.selectedQuestionIndex >= this.question.length - 1) {
+            return;
+          }
+          this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
+        })
       )
       .subscribe(res => console.log('success', res), error => console.log('error', error));
     // this.selectedQuestionIndex = this.selectedQuestionIndex + 1;

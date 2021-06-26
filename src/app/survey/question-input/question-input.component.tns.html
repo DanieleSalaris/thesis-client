@@ -1,7 +1,8 @@
 <StackLayout [formGroup]="formGroup">
   <Label class="question-label" [text]="label" textWrap="true"></Label>
   <TextField
-    formControlName=""
+    formControlName="value"
+    [keyboardType]="type"
   ></TextField>
   <FlexboxLayout class="button-container">
     <Button text="prev" (tap)="onPrevQuestion()"></Button>

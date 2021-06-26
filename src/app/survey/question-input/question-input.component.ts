@@ -19,9 +19,7 @@ import {max} from 'rxjs/operators';
     } = value;
 
     if (this.type !== type || this.minLength !== minLength || this.maxLength !== maxLength) { // changed values
-      this.formGroup = this.fb.group({
-        value: ['', Validators.required, Validators.minLength(minLength), Validators.maxLength(maxLength)]
-      });
+      this.initFormValue();
     }
 
     this.type = type;
@@ -37,7 +35,13 @@ import {max} from 'rxjs/operators';
     };
   }
 
-  private type: string;
+  private _startValue = '';
+  @Input() set startValue(value: {data: string}) {
+    this._startValue = value.data;
+    this.initFormValue(this._startValue);
+  }
+
+  type: string;
   private minLength: number;
   private maxLength: number;
 
@@ -52,10 +56,26 @@ import {max} from 'rxjs/operators';
   constructor(private fb: FormBuilder) {}
 
   onNextQuestion () {
-    this.nextQuestion.emit();
+    const formValid = this.validateForm();
+
+    if (!formValid) {
+      return;
+    }
+
+    this.nextQuestion.emit(this.valueControl.value);
   }
 
   onPrevQuestion () {
     this.prevQuestion.emit();
+  }
+
+  validateForm(): boolean {
+    return this.formGroup.valid;
+  }
+
+  initFormValue(startValue= '') {
+    this.formGroup = this.fb.group({
+      value: [startValue, [Validators.required, Validators.minLength(this.minLength), Validators.maxLength(this.maxLength)]]
+    });
   }
 }
