@@ -4,6 +4,7 @@ import {map, tap} from 'rxjs/operators';
 import {QuestionChoiceModel} from '@src/app/survey/question-choice/question-choice.model';
 import {QuestionArrayModel} from '@src/app/survey/question-array/question-array.model';
 import {QuestionInputModel} from '@src/app/survey/question-input/question-input.model';
+import {AsyncSubject, Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import {QuestionInputModel} from '@src/app/survey/question-input/question-input.
 export class SurveyService {
   prefix = 'API/survey';
   instancePrefix = 'API/instance';
+  instanceId = null;
+  survey = null;
 
   constructor(private http: HttpClient) {
 
@@ -38,6 +41,30 @@ export class SurveyService {
 
   getAnswer(instanceId, questionId) {
     return this.http.get(`API/instance/${instanceId}/question/${questionId}/answer/`);
+  }
+
+  private refreshSurvey(instanceId) {
+    return this.http.get(`${this.instancePrefix}/${instanceId}/question`).pipe(
+      tap(survey => {
+        this.instanceId = instanceId;
+        this.survey = survey;
+      }),
+      tap(() => console.log('refreshing survey'))
+    );
+  }
+
+  getSurvey2(instanceId: string): Observable<any> {
+    if (instanceId !== this.instanceId || this.survey === null) {
+      this.instanceId = null;
+      return this.refreshSurvey(instanceId);
+    }
+    return of(this.survey);
+  }
+
+  getQuestion(instanceId, questionId) {
+    return this.getSurvey2(instanceId).pipe(
+      map(questions => questions.find(question => question._id === questionId))
+    );
   }
 
   private formatQuestion(question) {

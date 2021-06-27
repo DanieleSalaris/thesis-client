@@ -16,5 +16,9 @@ export const routes: Routes = [
   {
     path: 'question',
     component: QuestionComponent,
+  },
+  {
+    path: 'instance/:instanceId/question/:questionId',
+    component: QuestionComponent,
   }
 ];

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SurveyService} from '@src/app/survey/survey.service';
-import {Router} from '@angular/router';
-import {tap} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
+import {map, tap} from 'rxjs/operators';
 import {QuestionChoiceModel} from '@src/app/survey/question-choice/question-choice.model';
 import {QuestionArrayModel} from '@src/app/survey/question-array/question-array.model';
 import {QuestionInputModel} from '@src/app/survey/question-input/question-input.model';
@@ -15,6 +15,8 @@ import {QuestionInputModel} from '@src/app/survey/question-input/question-input.
 export class QuestionComponent implements OnInit, OnDestroy {
   survey$: Observable<any>;
   answer$: Observable<any>;
+  instanceId$: Observable<string>;
+  questionId$: Observable<string>;
 
   // @todo change in questions
   question;
@@ -57,6 +59,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   constructor(
     private surveyService: SurveyService,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -75,6 +78,32 @@ export class QuestionComponent implements OnInit, OnDestroy {
     //   // res => console.log(this.selectedQuestion),
     //   // error => console.log(error)
     // );
+
+    this.instanceId$ = this.route.paramMap.pipe(
+      map(params => params.get('instanceId'))
+    );
+
+    this.questionId$ = this.route.paramMap.pipe(
+      map(params => params.get('questionId'))
+    );
+
+    this.surveyService.getQuestion('2', '1').subscribe(
+      res => {
+        console.log('get question success', res);
+        this.surveyService.getQuestion('2', '2').subscribe(
+          res2 => {
+            console.log('get question success', res2);
+            this.surveyService.getQuestion('1', '2').subscribe(
+              res3 => console.log('get question success', res3),
+              err => console.log('get question error', err)
+            );
+          },
+          err => console.log('get question error', err)
+        );
+      },
+      err => console.log('get question error', err)
+    );
+
 
     this.questionSubscription = this.surveyService.getQuestionsFromInstanceId(this.instanceId)
       .pipe(
