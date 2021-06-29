@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of, zip} from 'rxjs';
 import {SurveyService} from '@src/app/survey/survey.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap} from 'rxjs/operators';
+import {map, mergeMap, switchMap, take, tap} from 'rxjs/operators';
 import {QuestionChoiceModel} from '@src/app/survey/question-choice/question-choice.model';
 import {QuestionArrayModel} from '@src/app/survey/question-array/question-array.model';
 import {QuestionInputModel} from '@src/app/survey/question-input/question-input.model';
@@ -17,6 +17,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   answer$: Observable<any>;
   instanceId$: Observable<string>;
   questionId$: Observable<string>;
+  nextQuestionId$;
+  prevQuestionId$;
 
   // @todo change in questions
   question;
@@ -87,30 +89,20 @@ export class QuestionComponent implements OnInit, OnDestroy {
       map(params => params.get('questionId'))
     );
 
-    this.surveyService.getQuestion('2', '1').subscribe(
-      res => {
-        console.log('get question success', res);
-        this.surveyService.getQuestion('2', '2').subscribe(
-          res2 => {
-            console.log('get question success', res2);
-            this.surveyService.getQuestion('1', '2').subscribe(
-              res3 => console.log('get question success', res3),
-              err => console.log('get question error', err)
-            );
-          },
-          err => console.log('get question error', err)
-        );
-      },
-      err => console.log('get question error', err)
-    );
-
-
     this.questionSubscription = this.surveyService.getQuestionsFromInstanceId(this.instanceId)
       .pipe(
         tap(questions => this.question = questions),
         tap(() => this.selectedQuestionIndex = 0)
       )
       .subscribe();
+
+    this.nextQuestionId$ = zip(this.instanceId$, this.questionId$).pipe(
+      switchMap(([instanceId, questionId]) => this.surveyService.getNextQuestionId(instanceId, questionId))
+    );
+
+    this.prevQuestionId$ = zip(this.instanceId$, this.questionId$).pipe(
+      switchMap(([instanceId, questionId]) => this.surveyService.getPrevQuestionId(instanceId, questionId))
+    );
   }
 
   ngOnDestroy() {
@@ -128,24 +120,38 @@ export class QuestionComponent implements OnInit, OnDestroy {
     // }
 
     this.surveyService
-      .answerQuestion(this.instanceId, this.selectedQuestionId, value)
-      .pipe(
-        tap(() => {
-          if (this.selectedQuestionIndex >= this.question.length - 1) {
-            return;
-          }
-          this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
-        })
+      .answerQuestion(this.instanceId, this.selectedQuestionId, value).pipe(
+      // tap(() => {
+      //   if (this.selectedQuestionIndex >= this.question.length - 1) {
+      //     return;
+      //   }
+      //   this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
+      // })
+        switchMap(() => this.navigateToQuestion(this.nextQuestionId$)),
       )
       .subscribe(res => console.log('success', res), error => console.log('error', error));
     // this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
   }
 
   prevQuestion() {
-    if (this.selectedQuestionIndex <= 0) {
-      return;
-    }
+    // if (this.selectedQuestionIndex <= 0) {
+    //   return;
+    // }
+    //
+    // this.selectedQuestionIndex = this.selectedQuestionIndex - 1;
+    this.navigateToQuestion(this.prevQuestionId$).subscribe();
+  }
 
-    this.selectedQuestionIndex = this.selectedQuestionIndex - 1;
+  navigateToQuestion(questionId$) {
+    return zip(this.instanceId$, questionId$).pipe(
+      take(1),
+      switchMap(([instanceId, questionId]) => {
+        console.log('try to navigate', {instanceId, questionId});
+        if (instanceId === null || questionId === null) {
+          return of();
+        }
+        return this.router.navigate(['/instance', instanceId, 'question', questionId]);
+      })
+    );
   }
 }

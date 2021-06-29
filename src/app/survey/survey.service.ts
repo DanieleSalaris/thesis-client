@@ -67,6 +67,24 @@ export class SurveyService {
     );
   }
 
+  getNextQuestionId(instanceId, questionId): Observable<number | null> {
+    return this.getSurvey2(instanceId).pipe(
+      map(questions => {
+        const index = questions.findIndex(question => question._id === questionId);
+        return questions[index + 1]?._id ?? null;
+      })
+    );
+  }
+
+  getPrevQuestionId(instanceId, questionId): Observable<number | null> {
+    return this.getSurvey2(instanceId).pipe(
+      map(questions => {
+        const index = questions.findIndex(question => question._id === questionId);
+        return questions[index - 1]?._id ?? null;
+      })
+    );
+  }
+
   private formatQuestion(question) {
     const questionData = question.type === 'choice' ? new QuestionChoiceModel(question.data) :
       question.type === 'array' ? new QuestionArrayModel(question.data) :
