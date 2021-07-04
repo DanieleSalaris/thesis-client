@@ -27,19 +27,16 @@ export class SurveyService {
     return this.http.get(
       `API/instance/${instanceId}/question`
     ).pipe(
-      // tap(res => console.log('questions', res)),
       map((questions: any[]) => questions.map(q => this.formatQuestion(q))),
     );
 
   }
 
   answerQuestion(instanceId, questionId, value) {
-    console.log('saving', {instanceId, questionId, value});
     return this.http.post(`API/instance/${instanceId}/question/${questionId}/answer`, {value});
   }
 
   getAnswer(instanceId, questionId) {
-    console.log('getting answer', {instanceId, questionId});
     return this.http.get(`API/instance/${instanceId}/question/${questionId}/answer/`);
   }
 
@@ -49,7 +46,6 @@ export class SurveyService {
         this.instanceId = instanceId;
         this.survey = survey;
       }),
-      tap(() => console.log('refreshing survey'))
     );
   }
 

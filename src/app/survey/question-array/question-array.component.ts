@@ -15,7 +15,6 @@ export class QuestionArrayComponent {
 
   @Input() set maxNumberOfChoices(value: number) {
 
-    console.log('max number of choices', value);
     this._maxNumberOfChoices = value;
     this.singleChoice = value === 1;
   }
@@ -23,8 +22,12 @@ export class QuestionArrayComponent {
   @Input() hasOtherOption: boolean;
 
   private _startValue = [[]];
-  @Input() set startValue(value: {data: number[][]}) {
-    this._startValue = value.data;
+  @Input() set startValue(value: number[][]) {
+    if (!value) {
+      return;
+    }
+
+    this._startValue = value;
     this.precompilateForm();
   }
 
@@ -32,8 +35,6 @@ export class QuestionArrayComponent {
     this._optionsAndSubQuestions = value;
 
     const {options, subQuestions} = value;
-
-    console.log('question-array', value);
 
     if (!options || !subQuestions) {
       return;
@@ -99,14 +100,9 @@ export class QuestionArrayComponent {
     return this.optionsAndSubQuestions.subQuestions;
   }
 
-  constructor(private fb: FormBuilder) {
-    console.log('constructing question array');
-  }
+  constructor(private fb: FormBuilder) {}
 
   submit() {
-    // console.log(this.checkBoxesControl.controls.map(c => c.value));
-
-    //  console.log(this.checkBoxesControl.controls);
     const values = this.checkBoxesControl.controls.map(
       (subQuestion: FormArray) => subQuestion.controls.map(c => c.value)
     );

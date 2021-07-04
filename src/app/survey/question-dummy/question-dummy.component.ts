@@ -14,14 +14,14 @@ import {QuestionInputModel} from '@src/app/survey/question-input/question-input.
   @Input() hasNextQuestion: boolean;
   @Input() hasPrevQuestion: boolean;
 
-  private _startValue;
-  @Input() set startValue(value) {
-    this._startValue = value;
-    console.log('start value', value);
+  private _answer;
+  @Input() set answer(value) {
+    this._answer = value;
+    this.changeStartValue();
   }
 
-  get startValue() {
-    return this._startValue;
+  get answer() {
+    return this._answer;
   }
 
   @Input() set question (value: any) {
@@ -42,6 +42,9 @@ import {QuestionInputModel} from '@src/app/survey/question-input/question-input.
     this.questionData = this.isTypeChoice ? new QuestionChoiceModel(value.data)
         : this.isTypeArray ? new QuestionArrayModel(value.data)
         : this.isTypeInput ? new QuestionInputModel(value.data) : {};
+
+
+    this.changeStartValue();
   }
 
   questionType: string;
@@ -50,6 +53,7 @@ import {QuestionInputModel} from '@src/app/survey/question-input/question-input.
   isTypeChoice = false;
   isTypeArray = false;
   isTypeInput = false;
+  startValue;
 
   constructor() {}
 
@@ -59,5 +63,14 @@ import {QuestionInputModel} from '@src/app/survey/question-input/question-input.
 
   onPrevQuestion() {
     this.prevQuestion.emit();
+  }
+
+  changeStartValue() {
+    if (!this.answer || this.answer.questionType !== this.questionType) {
+      this.startValue = null;
+      return;
+    }
+
+    this.startValue = this.answer.data;
   }
 }

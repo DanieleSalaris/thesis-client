@@ -36,8 +36,12 @@ import {max} from 'rxjs/operators';
   }
 
   private _startValue = '';
-  @Input() set startValue(value: {data: string}) {
-    this._startValue = value.data;
+  @Input() set startValue(value: string) {
+    if (!value) {
+      return;
+    }
+
+    this._startValue = value;
     this.initFormValue(this._startValue);
   }
 

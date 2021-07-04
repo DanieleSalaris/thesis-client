@@ -4,7 +4,7 @@
       [question]="question$ | async"
       [hasNextQuestion]="hasNextQuestion$ | async"
       [hasPrevQuestion]="hasPrevQuestion$ | async"
-      [startValue]="answer$ | async"
+      [answer]="answer$ | async"
       (nextQuestion)="nextQuestion($event)"
       (prevQuestion)="prevQuestion()"
     ></app-question-dummy>

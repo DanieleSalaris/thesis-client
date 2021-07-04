@@ -17,8 +17,12 @@ export class QuestionChoiceComponent implements OnInit {
   @Input() hasOtherOption: boolean;
 
   private _startValue = [];
-  @Input() set startValue(value: {data: number[]}) {
-    this._startValue = value.data;
+  @Input() set startValue(value: number[]) {
+    this._startValue = value;
+
+    if (!value) {
+      return;
+    }
     this.precompilateForm();
   }
 
@@ -26,12 +30,27 @@ export class QuestionChoiceComponent implements OnInit {
   @Input() set options(value: {label: string}[]) {
     this._options = value;
 
-    this.initFormGroup();
-    while (this.checkBoxesControl.controls.length < value.length) {
-      this.checkBoxesControl.push(
-        this.fb.control(false)
-      );
+    // const initValues = [];
+    // for (let i = 0; i < subQuestions.length; i++) {
+    //   const initRow = [];
+    //   for (let j = 0; j < options.length; j++) {
+    //     initRow[j] = false;
+    //   }
+    //   initValues[i] = initRow;
+    // }
+
+    const initValue = [];
+    for (let i = 0; i < this._options.length; i++) {
+      initValue[i] = false;
     }
+
+    this.initFormGroup(initValue);
+
+    // while (this.checkBoxesControl.controls.length < value.length) {
+    //   this.checkBoxesControl.push(
+    //     this.fb.control(false)
+    //   );
+    // }
     // this.checkBoxesControl.
   }
 
