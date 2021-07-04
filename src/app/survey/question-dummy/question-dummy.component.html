@@ -1,0 +1,34 @@
+<app-question-choice
+  *ngIf="isTypeChoice"
+  [label]="questionLabel"
+  [minNumberOfChoices]="questionData.minNumberOfChoices"
+  [maxNumberOfChoices]="questionData.maxNumberOfChoices"
+  [hasOtherOption]="questionData.hasOtherOption"
+  [options]="questionData.options"
+  [startValue]="startValue"
+  (nextQuestion)="onNextQuestion($event)"
+  (prevQuestion)="onPrevQuestion()"
+>
+</app-question-choice>
+<app-question-array
+  *ngIf="isTypeArray"
+  [label]="questionLabel"
+  [minNumberOfChoices]="questionData.minNumberOfChoices"
+  [maxNumberOfChoices]="questionData.maxNumberOfChoices"
+  [optionsAndSubQuestions]="{subQuestions: questionData.subQuestion, options: questionData.options}"
+  [startValue]="startValue"
+  (nextQuestion)="onNextQuestion($event)"
+  (prevQuestion)="onPrevQuestion()"
+></app-question-array>
+<app-question-input
+  *ngIf="isTypeInput"
+  [label]="questionData.label"
+  [textConfigValues]="{
+              type: questionData.type,
+              minLength: questionData.minLength,
+              maxLength: questionData.maxLength
+            }"
+  [startValue]="startValue"
+  (nextQuestion)="onNextQuestion($event)"
+  (prevQuestion)="onPrevQuestion()"
+></app-question-input>

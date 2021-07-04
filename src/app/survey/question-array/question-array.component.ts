@@ -33,6 +33,8 @@ export class QuestionArrayComponent {
 
     const {options, subQuestions} = value;
 
+    console.log('question-array', value);
+
     if (!options || !subQuestions) {
       return;
     }
@@ -97,7 +99,9 @@ export class QuestionArrayComponent {
     return this.optionsAndSubQuestions.subQuestions;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    console.log('constructing question array');
+  }
 
   submit() {
     // console.log(this.checkBoxesControl.controls.map(c => c.value));

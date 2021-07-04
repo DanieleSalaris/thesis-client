@@ -5,11 +5,13 @@ import {QuestionChoiceComponent} from '@src/app/survey/question-choice/question-
 import {QuestionArrayComponent} from '@src/app/survey/question-array/question-array.component';
 import {QuestionInputComponent} from '@src/app/survey/question-input/question-input.component';
 import {ConfirmButtonsComponent} from '@src/app/survey/confirm-buttons/confirm-buttons.component';
+import {QuestionDummyComponent} from '@src/app/survey/question-dummy/question-dummy.component';
 
 export const declarations = [
   AppComponent,
   HomeComponent,
   QuestionComponent,
+  QuestionDummyComponent,
   QuestionChoiceComponent,
   QuestionArrayComponent,
   QuestionInputComponent,

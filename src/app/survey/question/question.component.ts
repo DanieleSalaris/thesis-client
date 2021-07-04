@@ -17,8 +17,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
   answer$: Observable<any>;
   instanceId$: Observable<string>;
   questionId$: Observable<string>;
+  question$: Observable<any>;
   nextQuestionId$;
   prevQuestionId$;
+  hasNextQuestion$;
+  hasPrevQuestion$;
 
   // @todo change in questions
   question;
@@ -50,7 +53,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.selectedQuestionType = question.type;
     this.selectedQuestion = question.data;
     this.selectedQuestionId = question._id;
-    this.answer$ = this.surveyService.getAnswer(this.instanceId, this.selectedQuestionId);
+    // this.answer$ = this.surveyService.getAnswer(this.instanceId, this.selectedQuestionId);
     this.answer$.subscribe(res => console.log('success', res), error => console.log('error', error));
   }
 
@@ -96,12 +99,30 @@ export class QuestionComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.nextQuestionId$ = zip(this.instanceId$, this.questionId$).pipe(
+    const instanceIdAndQuestionId$ = zip(this.instanceId$, this.questionId$);
+
+    this.question$ = instanceIdAndQuestionId$.pipe(
+      switchMap(([instanceId, questionId]) => this.surveyService.getQuestion(instanceId, questionId))
+    );
+
+    this.answer$ = instanceIdAndQuestionId$.pipe(
+      switchMap(([instanceId, questionId]) => this.surveyService.getAnswer(instanceId, questionId))
+    );
+
+    this.nextQuestionId$ = instanceIdAndQuestionId$.pipe(
       switchMap(([instanceId, questionId]) => this.surveyService.getNextQuestionId(instanceId, questionId))
     );
 
-    this.prevQuestionId$ = zip(this.instanceId$, this.questionId$).pipe(
+    this.prevQuestionId$ = instanceIdAndQuestionId$.pipe(
       switchMap(([instanceId, questionId]) => this.surveyService.getPrevQuestionId(instanceId, questionId))
+    );
+
+    this.hasNextQuestion$ = this.nextQuestionId$.pipe(
+      map(id => id !== null)
+    );
+
+    this.hasPrevQuestion$ = this.prevQuestionId$.pipe(
+      map(id => id !== null)
     );
   }
 
@@ -119,18 +140,23 @@ export class QuestionComponent implements OnInit, OnDestroy {
     //   return;
     // }
 
-    this.surveyService
-      .answerQuestion(this.instanceId, this.selectedQuestionId, value).pipe(
-      // tap(() => {
-      //   if (this.selectedQuestionIndex >= this.question.length - 1) {
-      //     return;
-      //   }
-      //   this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
-      // })
-        switchMap(() => this.navigateToQuestion(this.nextQuestionId$)),
-      )
-      .subscribe(res => console.log('success', res), error => console.log('error', error));
-    // this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
+    zip(this.instanceId$, this.questionId$).pipe(
+      take(1),
+      switchMap(([instanceId, questionId]) => this.surveyService.answerQuestion(instanceId, questionId, value)),
+      switchMap(() => this.navigateToQuestion(this.nextQuestionId$))
+    ).subscribe();
+    // this.surveyService
+    //   .answerQuestion(this.instanceId, this.selectedQuestionId, value).pipe(
+    //   // tap(() => {
+    //   //   if (this.selectedQuestionIndex >= this.question.length - 1) {
+    //   //     return;
+    //   //   }
+    //   //   this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
+    //   // })
+    //     switchMap(() => this.navigateToQuestion(this.nextQuestionId$)),
+    //   )
+    //   .subscribe(res => console.log('success', res), error => console.log('error', error));
+    // // this.selectedQuestionIndex = this.selectedQuestionIndex + 1;
   }
 
   prevQuestion() {
@@ -142,11 +168,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.navigateToQuestion(this.prevQuestionId$).subscribe();
   }
 
-  navigateToQuestion(questionId$) {
+  navigateToQuestion(questionId$: Observable<string>) {
     return zip(this.instanceId$, questionId$).pipe(
       take(1),
       switchMap(([instanceId, questionId]) => {
-        console.log('try to navigate', {instanceId, questionId});
         if (instanceId === null || questionId === null) {
           return of();
         }

@@ -15,9 +15,7 @@ export class SurveyService {
   instanceId = null;
   survey = null;
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   getSurvey() {
     return this.http.get(
@@ -36,10 +34,12 @@ export class SurveyService {
   }
 
   answerQuestion(instanceId, questionId, value) {
+    console.log('saving', {instanceId, questionId, value});
     return this.http.post(`API/instance/${instanceId}/question/${questionId}/answer`, {value});
   }
 
   getAnswer(instanceId, questionId) {
+    console.log('getting answer', {instanceId, questionId});
     return this.http.get(`API/instance/${instanceId}/question/${questionId}/answer/`);
   }
 
@@ -63,7 +63,7 @@ export class SurveyService {
 
   getQuestion(instanceId, questionId) {
     return this.getSurvey2(instanceId).pipe(
-      map(questions => questions.find(question => question._id === questionId))
+      map(questions => questions.find(question => question._id === questionId)),
     );
   }
 

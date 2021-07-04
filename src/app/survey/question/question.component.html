@@ -1,5 +1,14 @@
 <div class="root">
   <div class="card question-container">
+    <app-question-dummy
+      [question]="question$ | async"
+      [hasNextQuestion]="hasNextQuestion$ | async"
+      [hasPrevQuestion]="hasPrevQuestion$ | async"
+      [startValue]="answer$ | async"
+      (nextQuestion)="nextQuestion($event)"
+      (prevQuestion)="prevQuestion()"
+    ></app-question-dummy>
+    <!--
     <app-question-choice
       *ngIf="selectedQuestionType=== 'choice'"
       [label]="selectedQuestion?.data?.label"
@@ -33,5 +42,6 @@
       (prevQuestion)="prevQuestion()"
       [startValue]="(answer$ | async)"
     ></app-question-input>
+    -->
   </div>
 </div>
