@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToQuestion() {
-    this.router.navigate(['question'])
+    this.router.navigate(['instance', 2, 'question', 1])
       .catch();
   }
 }

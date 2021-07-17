@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
-import {QuestionChoiceModel} from '@src/app/survey/question-choice/question-choice.model';
-import {QuestionArrayModel} from '@src/app/survey/question-array/question-array.model';
-import {QuestionInputModel} from '@src/app/survey/question-input/question-input.model';
-import {AsyncSubject, Observable, of} from 'rxjs';
+import {QuestionChoiceModel} from '@src/app/survey/question/question-choice/question-choice.model';
+import {QuestionArrayModel} from '@src/app/survey/question/question-array/question-array.model';
+import {QuestionInputModel} from '@src/app/survey/question/question-input/question-input.model';
+import {Observable, of} from 'rxjs';
+import {InstanceModel} from '@src/app/survey/instance.model';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,12 @@ export class SurveyService {
         const index = questions.findIndex(question => question._id === questionId);
         return questions[index - 1]?._id ?? null;
       })
+    );
+  }
+
+  getInstances() {
+    return this.http.get<any>(this.instancePrefix).pipe(
+      map(instances => instances.map(i => new InstanceModel(i)))
     );
   }
 

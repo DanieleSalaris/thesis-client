@@ -5,7 +5,7 @@ import {findAll} from '@angular/compiler-cli/ngcc/src/utils';
 @Component({
   selector: 'app-question-choice',
   templateUrl: './question-choice.component.html',
-  styleUrls: ['./question-choice.component.css', '../question/question.component.css']
+  styleUrls: ['./question-choice.component.css', '../question.component.css']
 })
 export class QuestionChoiceComponent implements OnInit {
   @Output() nextQuestion = new EventEmitter();

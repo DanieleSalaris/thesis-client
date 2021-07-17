@@ -4,7 +4,7 @@ import {AbstractControl, FormArray, FormBuilder} from '@angular/forms';
 @Component({
   selector: 'app-question-array',
   templateUrl: './question-array.component.html',
-  styleUrls: ['./question-array.component.css', '../question/question.component.css']
+  styleUrls: ['./question-array.component.css', '../question.component.css']
 })
 export class QuestionArrayComponent {
   @Output() nextQuestion = new EventEmitter();

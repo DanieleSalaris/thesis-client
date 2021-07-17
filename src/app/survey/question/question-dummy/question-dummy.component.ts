@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {QuestionChoiceModel} from '@src/app/survey/question-choice/question-choice.model';
-import {QuestionArrayModel} from '@src/app/survey/question-array/question-array.model';
-import {QuestionInputModel} from '@src/app/survey/question-input/question-input.model';
+import {QuestionChoiceModel} from '@src/app/survey/question/question-choice/question-choice.model';
+import {QuestionArrayModel} from '@src/app/survey/question/question-array/question-array.model';
+import {QuestionInputModel} from '@src/app/survey/question/question-input/question-input.model';
 
 @Component({
   selector: 'app-question-dummy',

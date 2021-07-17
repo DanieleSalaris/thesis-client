@@ -5,7 +5,7 @@ import {max} from 'rxjs/operators';
 @Component({
   selector: 'app-question-input',
   templateUrl: './question-input.component.html',
-  styleUrls: ['./question-input.component.css', '../question/question.component.css']
+  styleUrls: ['./question-input.component.css', '../question.component.css']
 }) export class QuestionInputComponent {
   @Output() nextQuestion = new EventEmitter();
   @Output() prevQuestion = new EventEmitter();
