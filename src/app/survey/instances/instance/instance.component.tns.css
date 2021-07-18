@@ -1,0 +1,18 @@
+.container {
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 8px;
+  android-elevation: 1;
+  padding: 30px 50px;
+  margin: 0 1px 40px;
+}
+
+.day.month {
+  font-size: 28px;
+}
+
+.year {
+  font-size: 24px;
+  margin-top: 20px
+}

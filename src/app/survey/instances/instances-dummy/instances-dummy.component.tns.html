@@ -1,0 +1,8 @@
+<ScrollView class="scroll">
+  <StackLayout class="scroll-content">
+    <app-instance
+      *ngFor="let instance of instances"
+      [instance]="instance"
+    ></app-instance>
+  </StackLayout>
+</ScrollView>

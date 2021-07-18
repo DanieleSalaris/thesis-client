@@ -7,7 +7,7 @@ import {InstancesComponent} from '@src/app/survey/instances/instances.component'
 export const routes: Routes = [
   {
       path: '',
-      redirectTo: '/question',
+      redirectTo: '/instance',
       pathMatch: 'full',
   },
   {

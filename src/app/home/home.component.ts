@@ -41,4 +41,9 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['instance', 2, 'question', 1])
       .catch();
   }
+
+  goToInstances() {
+    this.router.navigate(['instance'])
+      .catch();
+  }
 }
