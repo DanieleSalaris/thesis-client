@@ -18,8 +18,16 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
-    this.authService.login('002', '12345678')
+  login1() {
+    this.login('002');
+  }
+
+  login2() {
+    this.login('003');
+  }
+
+  login(userId: string) {
+    this.authService.login(userId, '12345678')
       .subscribe(
         () => {},
         error => console.error(error)
