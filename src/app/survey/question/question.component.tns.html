@@ -1,8 +1,8 @@
 <StackLayout class="root">
-  <Button
+  <!--<Button
     text="back"
     (tap)="goBack()"
-  ></Button>
+  ></Button>-->
 
   <ScrollView class="scroll">
     <StackLayout class="scroll-content">
@@ -15,41 +15,6 @@
           (nextQuestion)="nextQuestion($event)"
           (prevQuestion)="prevQuestion()"
         ></app-question-dummy>
-        <!--
-        <app-question-choice
-          *ngIf="selectedQuestionType=== 'choice'"
-          [label]="selectedQuestion?.data?.label"
-          [minNumberOfChoices]="selectedQuestion.minNumberOfChoices"
-          [maxNumberOfChoices]="selectedQuestion.maxNumberOfChoices"
-          [hasOtherOption]="selectedQuestion.hasOtherOption"
-          [options]="selectedQuestion?.options"
-          (nextQuestion)="nextQuestion($event)"
-          (prevQuestion)="prevQuestion()"
-          [startValue]="(answer$ | async)"
-        ></app-question-choice>
-        <app-question-array
-          *ngIf="selectedQuestionType === 'array'"
-          [label]="arrayQuestion?.label"
-          [minNumberOfChoices]="selectedQuestion?.minNumberOfChoices"
-          [maxNumberOfChoices]="selectedQuestion?.maxNumberOfChoices"
-          [optionsAndSubQuestions]="{subQuestions: selectedQuestion?.subQuestion, options: selectedQuestion?.options}"
-          (nextQuestion)="nextQuestion($event)"
-          (prevQuestion)="prevQuestion()"
-          [startValue]="(answer$ | async)"
-        ></app-question-array>
-        <app-question-input
-          *ngIf="selectedQuestionType === 'input'"
-          [label]="selectedQuestion?.label"
-          [textConfigValues]="{
-            type: selectedQuestion?.type,
-            minLength: selectedQuestion?.minLength,
-            maxLength: selectedQuestion?.maxLength
-          }"
-          (nextQuestion)="nextQuestion($event)"
-          (prevQuestion)="prevQuestion()"
-          [startValue]="(answer$ | async)"
-        ></app-question-input>
-        -->
       </FlexboxLayout>
     </StackLayout>
   </ScrollView>
