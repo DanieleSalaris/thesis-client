@@ -1,0 +1,18 @@
+<FlexboxLayout class="container backGround">
+  <StackLayout class="card" [formGroup]="form">
+    <TextField
+      hint="write"
+    ></TextField>
+    <!--<form [formGroup]="form">-->
+      <TextField
+        formControlName="username"
+      ></TextField>
+      <TextField
+        formControlName="password"
+      ></TextField>
+<!--    </form>-->
+
+    <Label text="username: {{username.value}}"></Label>
+    <Label text="password: {{password.value}}"></Label>
+  </StackLayout>
+</FlexboxLayout>

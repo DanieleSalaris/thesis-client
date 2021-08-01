@@ -1,0 +1,13 @@
+.container {
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+}
+.card {
+  android-elevation: 1;
+  width: 80%;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 50px 30px;
+  margin-bottom: 200px;
+}

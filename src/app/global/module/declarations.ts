@@ -9,10 +9,12 @@ import {QuestionDummyComponent} from '@src/app/survey/question/question-dummy/qu
 import {InstancesComponent} from '@src/app/survey/instances/instances.component';
 import {InstancesDummyComponent} from '@src/app/survey/instances/instances-dummy/instances-dummy.component';
 import {InstanceComponent} from '@src/app/survey/instances/instance/instance.component';
+import {LoginComponent} from '@src/app/auth/login/login.component';
 
 export const declarations = [
   AppComponent,
   HomeComponent,
+  LoginComponent,
   InstancesComponent,
   InstancesDummyComponent,
   InstanceComponent,
