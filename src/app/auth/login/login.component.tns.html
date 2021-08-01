@@ -3,7 +3,7 @@
     <!-- username -->
     <Label
       class="field-label"
-      text="Username: {{errorVisible(username) ? 'visible' : 'invisible'}}"
+      text="Username:"
     ></Label>
     <TextField
       class="text-field"
@@ -24,7 +24,7 @@
       formControlName="password"
     ></TextField>
     <Label
-      class="error"
+      [ngClass]="{'error': true, 'visible': errorVisible(password)}"
       text="Insert a password"
     ></Label>
   </StackLayout>
