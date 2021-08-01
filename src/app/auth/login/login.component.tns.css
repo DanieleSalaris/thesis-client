@@ -3,6 +3,7 @@
   align-items: center;
   background-color: #f8f8f8;
 }
+
 .card {
   android-elevation: 1;
   width: 80%;
@@ -10,4 +11,27 @@
   border-radius: 8px;
   padding: 50px 30px;
   margin-bottom: 200px;
+}
+
+.text-field {
+  border: solid #000 1px;
+  border-width: 1;
+  width: 100%;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 0;
+}
+
+.field-label {
+  font-size: 18px;
+}
+
+.error {
+  color: #d23309;
+  margin-bottom: 20px;
+  opacity: 0;
+}
+
+.error.visible {
+  opacity: 1;
 }

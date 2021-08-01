@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from '@src/app/auth/auth.service';
-import {FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -32,5 +32,9 @@ export class LoginComponent {
     }
 
     console.log('ok', this.username, this.password);
+  }
+
+  errorVisible(control: AbstractControl) {
+    return control.invalid && !control.pristine;
   }
 }

@@ -1,18 +1,31 @@
-<FlexboxLayout class="container backGround">
+<FlexboxLayout class="container">
   <StackLayout class="card" [formGroup]="form">
+    <!-- username -->
+    <Label
+      class="field-label"
+      text="Username: {{errorVisible(username) ? 'visible' : 'invisible'}}"
+    ></Label>
     <TextField
-      hint="write"
+      class="text-field"
+      formControlName="username"
     ></TextField>
-    <!--<form [formGroup]="form">-->
-      <TextField
-        formControlName="username"
-      ></TextField>
-      <TextField
-        formControlName="password"
-      ></TextField>
-<!--    </form>-->
+    <Label
+      [ngClass]="{'error': true, 'visible': errorVisible(username)}"
+      text="Insert a username"
+    ></Label>
 
-    <Label text="username: {{username.value}}"></Label>
-    <Label text="password: {{password.value}}"></Label>
+    <!-- password -->
+    <Label
+      class="field-label"
+      text="Password:"
+    ></Label>
+    <TextField
+      class="text-field"
+      formControlName="password"
+    ></TextField>
+    <Label
+      class="error"
+      text="Insert a password"
+    ></Label>
   </StackLayout>
 </FlexboxLayout>
