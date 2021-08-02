@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {AuthService} from '@src/app/auth/auth.service';
-import {AbstractControl, FormBuilder, FormControl, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {catchError, mergeMap} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,20 +24,39 @@ export class LoginComponent {
     return this.form.get('password');
   }
 
+  wrongLogin = false;
+  loading = false;
+
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
   ) {}
 
   submit() {
+    this.wrongLogin = false;
+    this.loading = true;
+
     if (this.form.invalid) {
       return;
     }
 
-    console.log('ok', this.username, this.password);
+    this.authService.login(this.username.value, this.password.value).pipe(
+      mergeMap(() => this.router.navigate(['/home'])),
+      catchError(err => {
+        this.wrongLogin = true;
+        this.loading = false;
+        return of(err);
+      }),
+    ).subscribe();
   }
 
   errorVisible(control: AbstractControl) {
     return control.invalid && !control.pristine;
+  }
+
+  clearForm() {
+    this.wrongLogin = false;
+    this.form.reset();
   }
 }

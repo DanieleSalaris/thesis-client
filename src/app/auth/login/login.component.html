@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="card">
+    <form [formGroup]="form">
+      <!-- username -->
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input formControlName="username" matInput placeholder="Insert username">
+        <mat-error>Insert a username</mat-error>
+      </mat-form-field>
+
+      <!-- password -->
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput placeholder="Insert password">
+        <mat-error>Insert a password</mat-error>
+      </mat-form-field>
+
+      <!-- buttons -->
+      <div class="buttons">
+        <button (click)="submit()" mat-button color="primary" [disabled]="loading">LOGIN</button>
+        <button (click)="clearForm()" mat-button [disabled]="loading">CANCEL</button>
+      </div>
+    </form>
+    <span
+      [ngClass]="{'mat-error': true, 'wrong-login-message': true, 'visible': wrongLogin}"
+    >
+      Wrong Username or Password
+    </span>
+    <mat-progress-bar [ngClass]="{'visible': loading}" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>
