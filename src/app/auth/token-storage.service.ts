@@ -13,7 +13,7 @@ export class TokenStorageService {
     return localStorage.getItem('auth-token');
   }
 
-  decodeToken() {
-    console.log('decode tokens');
+  decodeToken(token) {
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }
