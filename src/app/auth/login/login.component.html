@@ -11,8 +11,12 @@
       <!-- password -->
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Password</mat-label>
-        <input formControlName="password" matInput placeholder="Insert password">
+        <input [type]="passwordVisible ? 'text' : 'password'" formControlName="password" matInput placeholder="Insert password">
         <mat-error>Insert a password</mat-error>
+        <button matSuffix mat-icon-button (click)="togglePasswordVisibility()">
+          <mat-icon *ngIf="passwordVisible">visibility</mat-icon>
+          <mat-icon *ngIf="!passwordVisible">visibility_off</mat-icon>
+        </button>
       </mat-form-field>
 
       <!-- buttons -->

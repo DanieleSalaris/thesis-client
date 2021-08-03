@@ -6,9 +6,11 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon';
 
 const MaterialComponents = [
   BrowserModule,
+  MatIconModule,
   MatButtonModule,
   MatCheckboxModule,
   MatTableModule,
