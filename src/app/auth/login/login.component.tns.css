@@ -23,6 +23,25 @@
   margin-bottom: 0;
 }
 
+.password-container {
+  padding-bottom: 10px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.password-container .text-field {
+  width: auto;
+  flex: 1;
+  margin-left: 0;
+}
+
+.password-container .icon {
+  width: 60px;
+  margin-top: 5px;
+  align-self: center;
+}
+
 .field-label {
   font-size: 18px;
 }

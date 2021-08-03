@@ -19,10 +19,18 @@
       class="field-label"
       text="Password:"
     ></Label>
-    <TextField
-      class="text-field"
-      formControlName="password"
-    ></TextField>
+    <FlexboxLayout class="password-container">
+      <TextField
+        class="text-field"
+        formControlName="password"
+        [secure]="!passwordVisible"
+      ></TextField>
+      <Label
+        (tap)="togglePasswordVisibility()"
+        [ngClass]="['icon' ,iconPassword.className]"
+        [text]="iconPassword.code"
+      ></Label>
+    </FlexboxLayout>
     <Label
       [ngClass]="{'error': true, 'visible': errorVisible(password)}"
       text="Insert a password"
