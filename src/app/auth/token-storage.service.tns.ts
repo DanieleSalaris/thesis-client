@@ -19,16 +19,17 @@ export class TokenStorageService {
   }
 
   decodeToken(token: string) {
+    const tokenBody = token.split('.')[1];
+
     // Android
     if (isAndroid) {
-      // const text = new java.lang.String(token);
-      // const data = text.getBytes('UTF-8');
-      // const base64 = android.util.Base64.encodeToString(data, android.util.Base64);
-      const text = new java.lang.String(token);
-      return JSON.parse(android.util.Base64.decode(text, android.util.Base64.DEFAULT));
+      const data = android.util.Base64.decode(tokenBody, android.util.Base64.DEFAULT);
+      const decodedString = new java.lang.String(data, java.nio.charset.StandardCharsets.UTF_8);
+      return JSON.parse(decodedString);
     }
 
     // IOS
+    // @todo implements for ios
     // const text = NSString.stringWithString("Yolo 10000");
     // const data = text.dataUsingEncoding(NSUTF8StringEncoding);
     // const base64 = data.base64EncodedStringWithOptions(0);

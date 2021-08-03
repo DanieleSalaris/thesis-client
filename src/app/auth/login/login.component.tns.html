@@ -27,6 +27,23 @@
       [ngClass]="{'error': true, 'visible': errorVisible(password)}"
       text="Insert a password"
     ></Label>
+
+    <FlexboxLayout class="buttons">
+      <Button
+        text="Login"
+        (tap)="submit()"
+      ></Button>
+      <Button
+        text="Cancel"
+        (tap)="clearForm()"
+      ></Button>
+    </FlexboxLayout>
+
+    <Label
+      [ngClass]="{'error': true, 'visible': wrongLogin}"
+      text="Wrong username or password"
+    >
+    </Label>
   </StackLayout>
-  <Progress [busy]="loading"></Progress>
+  <ActivityIndicator [busy]="loading"></ActivityIndicator>
 </FlexboxLayout>

@@ -1,6 +1,7 @@
 .container {
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: #f8f8f8;
 }
 
@@ -9,8 +10,8 @@
   width: 80%;
   background-color: #fff;
   border-radius: 8px;
-  padding: 50px 30px;
-  margin-bottom: 50px;
+  padding: 50px 30px 10px;
+  margin-bottom: 100px;
 }
 
 .text-field {
@@ -34,4 +35,15 @@
 
 .error.visible {
   opacity: 1;
+}
+
+.buttons {
+  justify-content: space-between;
+  width: 100%
+
+}
+
+.buttons Button {
+  width: 45%;
+  margin: 10px 0px;
 }

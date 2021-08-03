@@ -4,6 +4,7 @@ import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {catchError, mergeMap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
+import {UtilityService} from '@src/app/utility/utility.service';
 
 @Component({
   selector: 'app-login',
@@ -31,15 +32,20 @@ export class LoginComponent {
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
+    private utilityService: UtilityService,
   ) {}
 
   submit() {
     this.wrongLogin = false;
-    this.loading = true;
+    this.utilityService.dismissSoftKeyBoard();
 
     if (this.form.invalid) {
+      this.username.markAsDirty();
+      this.password.markAsDirty();
       return;
     }
+
+    this.loading = true;
 
     this.authService.login(this.username.value, this.password.value).pipe(
       mergeMap(() => this.router.navigate(['/home'])),
@@ -58,5 +64,6 @@ export class LoginComponent {
   clearForm() {
     this.wrongLogin = false;
     this.form.reset();
+    this.utilityService.dismissSoftKeyBoard();
   }
 }
