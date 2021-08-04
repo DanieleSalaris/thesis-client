@@ -26,7 +26,7 @@ export class InstanceComponent {
       this.month = month;
       this.year = year;
 
-      this.link = ['/instance', value._id, 'question',  '1'];
+      this.link = ['/instance', value._id];
     }
   }
 

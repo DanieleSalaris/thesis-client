@@ -18,12 +18,6 @@ export class SurveyService {
 
   constructor(private http: HttpClient) {}
 
-  getSurvey() {
-    return this.http.get(
-      `${this.prefix}/123`
-    );
-  }
-
   getQuestionsFromInstanceId(instanceId= '2') {
     return this.http.get(
       `API/instance/${instanceId}/question`
@@ -50,7 +44,7 @@ export class SurveyService {
     );
   }
 
-  getSurvey2(instanceId: string): Observable<any> {
+  getSurvey(instanceId: string): Observable<any> {
     if (instanceId !== this.instanceId || this.survey === null) {
       this.instanceId = null;
       return this.refreshSurvey(instanceId);
@@ -59,13 +53,13 @@ export class SurveyService {
   }
 
   getQuestion(instanceId, questionId) {
-    return this.getSurvey2(instanceId).pipe(
+    return this.getSurvey(instanceId).pipe(
       map(questions => questions.find(question => question._id === questionId)),
     );
   }
 
   getNextQuestionId(instanceId, questionId): Observable<number | null> {
-    return this.getSurvey2(instanceId).pipe(
+    return this.getSurvey(instanceId).pipe(
       map(questions => {
         const index = questions.findIndex(question => question._id === questionId);
         return questions[index + 1]?._id ?? null;
@@ -74,7 +68,7 @@ export class SurveyService {
   }
 
   getPrevQuestionId(instanceId, questionId): Observable<number | null> {
-    return this.getSurvey2(instanceId).pipe(
+    return this.getSurvey(instanceId).pipe(
       map(questions => {
         const index = questions.findIndex(question => question._id === questionId);
         return questions[index - 1]?._id ?? null;

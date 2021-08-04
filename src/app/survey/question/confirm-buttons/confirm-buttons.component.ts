@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {QuestionService} from '@src/app/survey/question/question.service';
 
 @Component({
   selector: 'app-confirm-buttons',
@@ -9,7 +10,17 @@ export class ConfirmButtonsComponent {
   @Output() next = new EventEmitter();
   @Output() prev = new EventEmitter();
 
-  constructor() {}
+  get hasNextQuestion(): boolean {
+    return this.questionService.hasNextQuestion;
+  }
+
+  get hasPrevQuestion(): boolean {
+    return  this.questionService.hasPrevQuestion;
+  }
+
+  constructor(
+    private questionService: QuestionService,
+  ) {}
 
   onNext() {
     this.next.emit();

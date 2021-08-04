@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {QuestionChoiceModel} from '@src/app/survey/question/question-choice/question-choice.model';
 import {QuestionArrayModel} from '@src/app/survey/question/question-array/question-array.model';
 import {QuestionInputModel} from '@src/app/survey/question/question-input/question-input.model';
+import {QuestionService} from '@src/app/survey/question/question.service';
 
 @Component({
   selector: 'app-question-dummy',
@@ -11,8 +12,21 @@ import {QuestionInputModel} from '@src/app/survey/question/question-input/questi
   @Output() nextQuestion = new EventEmitter();
   @Output() prevQuestion = new EventEmitter();
 
-  @Input() hasNextQuestion: boolean;
-  @Input() hasPrevQuestion: boolean;
+  @Input() set hasNextQuestion(value: boolean) {
+    this.questionService.hasNextQuestion = value;
+  }
+
+  get hasNextQuestion() {
+    return this.questionService.hasNextQuestion;
+  }
+
+  @Input() set hasPrevQuestion(value: boolean) {
+    this.questionService.hasPrevQuestion = value;
+  }
+
+  get hasPrevQuestion() {
+    return this.questionService.hasPrevQuestion;
+  }
 
   private _answer;
   @Input() set answer(value) {
@@ -55,7 +69,9 @@ import {QuestionInputModel} from '@src/app/survey/question/question-input/questi
   isTypeInput = false;
   startValue;
 
-  constructor() {}
+  constructor(
+    private questionService: QuestionService
+  ) {}
 
   onNextQuestion(event) {
     this.nextQuestion.emit(event);

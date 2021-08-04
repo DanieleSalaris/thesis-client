@@ -1,4 +1,15 @@
 <div class="root">
-  <button mat-raised-button color="primary" (click)="onPrev()">PREV</button>
-  <button mat-raised-button color="primary" (click)="onNext()">NEXT</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onPrev()"
+    [disabled]="!hasPrevQuestion"
+  >PREV</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onNext()"
+  >
+    {{hasNextQuestion ? 'NEXT' : 'CONFIRM'}}
+  </button>
 </div>
