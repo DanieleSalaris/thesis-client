@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, of, zip} from 'rxjs';
 import {SurveyService} from '@src/app/survey/survey.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, switchMap, take, tap} from 'rxjs/operators';
+import {map, switchMap, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-question',
@@ -81,10 +81,18 @@ export class QuestionComponent implements OnInit {
   }
 
   navigateToQuestion(questionId$: Observable<string>) {
-    return zip(this.instanceId$, questionId$).pipe(
+    return zip(this.instanceId$, questionId$, this.hasNextQuestion$).pipe(
       take(1),
-      switchMap(([instanceId, questionId]) => {
-        if (instanceId === null || questionId === null) {
+      switchMap(([instanceId, questionId, hasNextQuestion]) => {
+        if (instanceId === null) {
+          return of();
+        }
+
+        if (!hasNextQuestion) {
+          return this.router.navigate(['/instance']);
+        }
+
+        if (questionId === null) {
           return of();
         }
         return this.router.navigate(['/instance', instanceId, 'question', questionId]);

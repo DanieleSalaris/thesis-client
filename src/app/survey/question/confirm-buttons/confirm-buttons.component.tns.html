@@ -1,4 +1,12 @@
 <FlexboxLayout class="button-container">
-  <Button text="prev" (tap)="onPrev()"></Button>
-  <Button text="next" (tap)="onNext()"></Button>
+  <Button
+    text="prev"
+    (tap)="onPrev()"
+    [isEnabled]="hasPrevQuestion"
+  ></Button>
+  <Button
+    [text]="hasNextQuestion ? 'next' : 'confirm'"
+    (tap)="onNext()"
+
+  ></Button>
 </FlexboxLayout>

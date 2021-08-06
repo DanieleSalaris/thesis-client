@@ -15,7 +15,7 @@ export class ConfirmButtonsComponent {
   }
 
   get hasPrevQuestion(): boolean {
-    return  this.questionService.hasPrevQuestion;
+    return this.questionService.hasPrevQuestion;
   }
 
   constructor(

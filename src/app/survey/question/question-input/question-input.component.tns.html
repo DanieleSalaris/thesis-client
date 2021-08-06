@@ -4,19 +4,9 @@
     formControlName="value"
     [keyboardType]="type"
   ></TextField>
-  <FlexboxLayout class="button-container">
-    <Button text="prev" (tap)="onPrevQuestion()"></Button>
-    <Button text="next" (tap)="onNextQuestion()"></Button>
-  </FlexboxLayout>
-  <!--
-  <StackLayout class="checkboxes-container" *ngFor="let control of checkBoxesControl.controls; let i=index;">
-    <CheckBox
-      [text]="options[i].label"
-      [checked]="control.value"
-      (checkedChange)="toggleCheckbox($event.value, control, i)"
-    ></CheckBox>
-  </StackLayout>
-  <Button text="Submit" (tap)="submit()"></Button>
-  -->
+  <app-confirm-buttons
+    (next)="onNextQuestion()"
+    (prev)="onPrevQuestion()"
+  ></app-confirm-buttons>
 
 </StackLayout>
