@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
 
     this.authService.login(this.username.value, this.password.value).pipe(
-      mergeMap(() => this.router.navigate(['/home'])),
+      mergeMap(() => this.router.navigate(['/instance'])),
       catchError(err => {
         this.wrongLogin = true;
         this.loading = false;

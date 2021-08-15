@@ -9,6 +9,7 @@ import {providers} from '@src/app/global/module/providers';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '@src/app/material/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
+    MatSliderModule,
   ],
   providers: providers,
   bootstrap: [AppComponent]

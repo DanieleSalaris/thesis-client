@@ -1,0 +1,19 @@
+<div>
+  {{label}}
+  <form [formGroup]="fg">
+    <mat-slider
+      [min]="minNumber"
+      [max]="maxNumber"
+      step="1"
+      [value]="sliderControl.value"
+      (input)="onValueChange($event.value)"
+    ></mat-slider>
+  </form>
+  <p class="value-label">
+    {{sliderControl.value}}: {{selectedOption}}
+  </p>
+  <app-confirm-buttons
+    (next)="onNextQuestion()"
+    (prev)="onPrevQuestion()"
+  ></app-confirm-buttons>
+</div>

@@ -1,0 +1,18 @@
+<StackLayout>
+  <Label class="question-label" [text]="label" textWrap="true"></Label>
+
+  <Slider
+    [minValue]="minNumber"
+    [maxValue]="maxNumber"
+    (valueChange)="onValueChange($event.value)"
+  ></Slider>
+
+  <Label
+    class="answer-label"
+    text="{{sliderControl.value}}: {{selectedOption}}"
+  ></Label>
+  <app-confirm-buttons
+    (next)="onNextQuestion()"
+    (prev)="onPrevQuestion()"
+  ></app-confirm-buttons>
+</StackLayout>

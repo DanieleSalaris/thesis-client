@@ -1,0 +1,10 @@
+mat-slider {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.value-label {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}

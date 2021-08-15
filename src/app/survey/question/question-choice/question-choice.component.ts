@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl} from '@angular/forms';
-import {findAll} from '@angular/compiler-cli/ngcc/src/utils';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AbstractControl, FormArray, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-question-choice',
@@ -13,8 +12,18 @@ export class QuestionChoiceComponent implements OnInit {
 
   @Input() label: string;
   @Input() minNumberOfChoices: number;
-  @Input() maxNumberOfChoices: number;
   @Input() hasOtherOption: boolean;
+
+  private _maxNumberOfChoices;
+  @Input() set maxNumberOfChoices(value: number) {
+
+    this._maxNumberOfChoices = value;
+    this.singleChoice = value === 1;
+  }
+
+  get maxNumberOfChoices() {
+    return this._maxNumberOfChoices;
+  }
 
   private _startValue = [];
   @Input() set startValue(value: number[]) {
@@ -79,6 +88,7 @@ export class QuestionChoiceComponent implements OnInit {
   }
 
   errorMessage = '';
+  singleChoice = false;
 
   constructor(private fb: FormBuilder) {}
 
@@ -105,8 +115,22 @@ export class QuestionChoiceComponent implements OnInit {
   }
 
   toggleCheckbox(value: boolean, control: AbstractControl) {
+    if (!this.singleChoice) {
+      control.setValue(value);
+      this.numberOfTrueValues = this.countTrueValues();
+    }
+
+    if (!value) {
+      return;
+    }
+
+    const controls = this.checkBoxesControl.controls;
+
+    controls.map(c => {
+      c.setValue(false);
+    });
+
     control.setValue(value);
-    this.numberOfTrueValues = this.countTrueValues();
   }
 
   onNextQuestion () {

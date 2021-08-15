@@ -47,7 +47,6 @@ import {QuestionService} from '@src/app/survey/question/question.service';
 
     this.questionType = value.type;
     this.questionLabel = value.data.label;
-    this.questionData = value.data || {};
 
     this.isTypeChoice = this.questionType === 'choice';
     this.isTypeArray = this.questionType === 'array';

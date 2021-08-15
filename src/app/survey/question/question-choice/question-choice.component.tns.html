@@ -2,10 +2,19 @@
   <Label class="question-label" [text]="label" textWrap="true"></Label>
   <StackLayout class="checkboxes-container" *ngFor="let control of checkBoxesControl.controls; let i=index;">
     <CheckBox
+      *ngIf="singleChoice"
       [text]="options[i].label"
       [checked]="control.value"
       (checkedChange)="toggleCheckbox($event.value, control)"
       [isUserInteractionEnabled]="!disableCheckBoxes || control.value"
+      boxType="circle"
+    ></CheckBox>
+    <CheckBox
+      *ngIf="!singleChoice"
+      [text]="options[i].label"
+      [checked]="control.value"
+      (checkedChange)="toggleCheckbox($event.value, control)"
+      boxType="square"
     ></CheckBox>
   </StackLayout>
   <app-confirm-buttons

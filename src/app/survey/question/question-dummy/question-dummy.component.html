@@ -1,5 +1,5 @@
 <app-question-choice
-  *ngIf="isTypeChoice"
+  *ngIf="isTypeChoice && false"
   [label]="questionLabel"
   [minNumberOfChoices]="questionData.minNumberOfChoices"
   [maxNumberOfChoices]="questionData.maxNumberOfChoices"
@@ -10,6 +10,15 @@
   (prevQuestion)="onPrevQuestion()"
 >
 </app-question-choice>
+<app-question-choice-slider
+  *ngIf="isTypeChoice && true"
+  [label]="questionLabel"
+  [options]="questionData.options"
+  [startValue]="startValue"
+  (nextQuestion)="onNextQuestion($event)"
+  (prevQuestion)="onPrevQuestion()"
+>
+</app-question-choice-slider>
 <app-question-array
   *ngIf="isTypeArray"
   [label]="questionLabel"

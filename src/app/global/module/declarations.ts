@@ -11,6 +11,7 @@ import {InstancesDummyComponent} from '@src/app/survey/instances/instances-dummy
 import {InstanceComponent} from '@src/app/survey/instances/instance/instance.component';
 import {LoginComponent} from '@src/app/auth/login/login.component';
 import {QuestionContainerComponent} from '@src/app/survey/question-container/question-container.component';
+import {QuestionChoiceSliderComponent} from '@src/app/survey/question/question-choice-slider/question-choice-slider.component';
 
 export const declarations = [
   AppComponent,
@@ -23,6 +24,7 @@ export const declarations = [
   QuestionComponent,
   QuestionDummyComponent,
   QuestionChoiceComponent,
+  QuestionChoiceSliderComponent,
   QuestionArrayComponent,
   QuestionInputComponent,
   ConfirmButtonsComponent,
