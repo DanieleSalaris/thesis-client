@@ -82,6 +82,12 @@ export class SurveyService {
     );
   }
 
+  getTodayInstance(): Observable<InstanceModel> {
+    return this.http.post<any>(`${this.instancePrefix}/today-instance`, {}).pipe(
+      map(instance => new InstanceModel(instance))
+    );
+  }
+
   private formatQuestion(question) {
     const questionData = question.type === 'choice' ? new QuestionChoiceModel(question.data) :
       question.type === 'array' ? new QuestionArrayModel(question.data) :

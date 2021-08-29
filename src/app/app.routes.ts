@@ -6,6 +6,7 @@ import {InstancesComponent} from '@src/app/survey/instances/instances.component'
 import {LoginComponent} from '@src/app/auth/login/login.component';
 import {AuthGuard} from '@src/app/auth/auth.guard';
 import {QuestionContainerComponent} from '@src/app/survey/question-container/question-container.component';
+import {TodayInstanceComponent} from '@src/app/survey/instances/today-instance/today-instance.component';
 
 export const routes: Routes = [
   {
@@ -27,7 +28,8 @@ export const routes: Routes = [
       },
       {
         path: 'instance',
-        component: InstancesComponent,
+        component: TodayInstanceComponent,
+        // component: InstancesComponent,
       },
       {
         path: 'instance/:instanceId',
