@@ -62,7 +62,7 @@ import {QuestionService} from '@src/app/survey/question/question.service';
 
   questionType: string;
   questionLabel: string;
-  questionData: QuestionChoiceModel | QuestionArrayModel | QuestionInputModel | {} = {};
+  questionData: QuestionChoiceModel | QuestionArrayModel | QuestionInputModel | any = {};
   isTypeChoice = false;
   isTypeArray = false;
   isTypeInput = false;

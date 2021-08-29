@@ -1,5 +1,5 @@
 <app-question-choice
-  *ngIf="isTypeChoice && false"
+  *ngIf="isTypeChoice && !questionData.slider"
   [label]="questionLabel"
   [minNumberOfChoices]="questionData.minNumberOfChoices"
   [maxNumberOfChoices]="questionData.maxNumberOfChoices"
@@ -11,7 +11,7 @@
 >
 </app-question-choice>
 <app-question-choice-slider
-  *ngIf="isTypeChoice && true"
+  *ngIf="isTypeChoice && questionData.slider"
   [label]="questionLabel"
   [options]="questionData.options"
   [startValue]="startValue"
