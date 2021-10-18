@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, FormControl} from '@angular/forms';
+import {findNativeScriptPlatformPathInSource} from '@nativescript/webpack/utils/ast-utils';
 
 @Component({
   selector: 'app-question-choice-slider',
