@@ -1,0 +1,19 @@
+.root {
+  background-color: #fafafa;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  android-elevation: 1;
+  padding: 40px 60px;
+  margin: 0 1px 40px;
+}
+
+Label {
+  font-size: 18px;
+  margin-bottom: 50px;
+}
