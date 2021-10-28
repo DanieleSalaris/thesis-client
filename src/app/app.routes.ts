@@ -7,11 +7,13 @@ import {LoginComponent} from '@src/app/auth/login/login.component';
 import {AuthGuard} from '@src/app/auth/auth.guard';
 import {QuestionContainerComponent} from '@src/app/survey/question-container/question-container.component';
 import {TodayInstanceComponent} from '@src/app/survey/instances/today-instance/today-instance.component';
+import {LoginGuard} from '@src/app/auth/login/login.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: '',
