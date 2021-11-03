@@ -28,6 +28,7 @@
     "@angular/router": "~11.0.0",
     "@nativescript/angular": "~11.0.0",
     "@nativescript/core": "~7.0.0",
+    "@nativescript/local-notifications": "^5.0.3",
     "@nativescript/theme": "~3.0.0",
     "@nstudio/nativescript-checkbox": "^2.0.4",
     "core-js": "^2.5.7",
