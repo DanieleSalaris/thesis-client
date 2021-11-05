@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start-local": "ng serve --proxy-config proxy-conf/local-proxy.conf.json",
+    "start-remote": "ng serve --proxy-config proxy-conf/remote-proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

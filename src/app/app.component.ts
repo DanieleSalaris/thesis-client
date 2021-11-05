@@ -11,9 +11,7 @@ export class AppComponent implements OnInit {
   constructor(
       private utilityService: UtilityService
   ) {
-    LocalNotifications.addOnMessageReceivedCallback(notificationData => {
-      console.log('Notification received: ' + JSON.stringify(notificationData));
-    });
+    this.utilityService.initNotifications();
   }
 
   ngOnInit() {

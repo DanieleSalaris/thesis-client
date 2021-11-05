@@ -23,6 +23,12 @@ export class UtilityService {
     }
   }
 
+  initNotifications() {
+    LocalNotifications.addOnMessageReceivedCallback(notificationData => {
+      console.log('Notification received: ' + JSON.stringify(notificationData));
+    });
+  }
+
   scheduleSurveyNotifications() {
     const notifications = this.generateNotifications();
 

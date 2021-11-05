@@ -10,6 +10,10 @@ export class UtilityService {
 
   }
 
+  initNotifications() {
+
+  }
+
   scheduleSurveyNotifications() {
 
   }

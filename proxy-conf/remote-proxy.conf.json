@@ -1,0 +1,9 @@
+{
+  "/API": {
+    "target": "https://s265553-thesis-server.herokuapp.com/",
+    "secure": false,
+    "pathRewrite": {
+      "^/API": "/api"
+    }
+  }
+}
