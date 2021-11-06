@@ -8,7 +8,7 @@ import isAfter from 'date-fns/isAfter';
   providedIn: 'root'
 })
 export class AuthService {
-  prefix = 'API/auth';
+  prefix = 'api/auth';
 
   constructor(
     private http: HttpClient,

@@ -11,8 +11,8 @@ import {InstanceModel} from '@src/app/survey/instance.model';
   providedIn: 'root'
 })
 export class SurveyService {
-  prefix = 'API/survey';
-  instancePrefix = 'API/instance';
+  prefix = 'api/survey';
+  instancePrefix = 'api/instance';
   instanceId = null;
   survey = null;
 
@@ -20,7 +20,7 @@ export class SurveyService {
 
   getQuestionsFromInstanceId(instanceId= '2') {
     return this.http.get(
-      `API/instance/${instanceId}/question`
+      `${this.instancePrefix}/${instanceId}/question`
     ).pipe(
       map((questions: any[]) => questions.map(q => this.formatQuestion(q))),
     );
@@ -28,11 +28,11 @@ export class SurveyService {
   }
 
   answerQuestion(instanceId, questionId, value) {
-    return this.http.post(`API/instance/${instanceId}/question/${questionId}/answer`, {value});
+    return this.http.post(`${this.instancePrefix}/${instanceId}/question/${questionId}/answer`, {value});
   }
 
   getAnswer(instanceId, questionId) {
-    return this.http.get(`API/instance/${instanceId}/question/${questionId}/answer/`);
+    return this.http.get(`${this.instancePrefix}/${instanceId}/question/${questionId}/answer/`);
   }
 
   private refreshSurvey(instanceId) {
