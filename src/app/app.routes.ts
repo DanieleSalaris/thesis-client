@@ -32,14 +32,17 @@ export const routes: Routes = [
         path: 'instance',
         component: TodayInstanceComponent,
         // component: InstancesComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'instance/:instanceId',
         component: QuestionContainerComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'instance/:instanceId/question/:questionId',
         component: QuestionComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }
