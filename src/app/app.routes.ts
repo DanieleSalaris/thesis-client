@@ -8,12 +8,27 @@ import {AuthGuard} from '@src/app/auth/auth.guard';
 import {QuestionContainerComponent} from '@src/app/survey/question-container/question-container.component';
 import {TodayInstanceComponent} from '@src/app/survey/instances/today-instance/today-instance.component';
 import {LoginGuard} from '@src/app/auth/login/login.guard';
+import {DataVisualizationComponent} from '@src/app/admin/data-visualization/data-visualization.component';
 
 export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
     canActivate: [LoginGuard]
+  },
+  {
+    path: 'admin',
+    children: [
+      {
+        path: 'data-visualization',
+        component: DataVisualizationComponent
+      },
+      {
+        path: '',
+        redirectTo: '/admin/data-visualization',
+        pathMatch: 'full'
+      },
+    ]
   },
   {
     path: '',
@@ -45,5 +60,5 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
       }
     ]
-  }
+  },
 ];

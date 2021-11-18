@@ -1,0 +1,17 @@
+<div class="root">
+  <div class="steps">
+    <div
+      style="transform: translateX({{computeTranslation(i)}}%)"
+      *ngFor="let step of steps; let i = index"
+      [ngClass]="{'step': true, 'disabled': i > maxStep}"
+    >
+      <div class="label">
+        {{step}}
+      </div>
+      <div class="vertical-bar"></div>
+    </div>
+  </div>
+  <div class="gradient">
+    <div class="percentage-bar" style="width:{{reversePercentage}}%"></div>
+  </div>
+</div>

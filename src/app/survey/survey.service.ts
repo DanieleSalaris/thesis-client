@@ -18,6 +18,14 @@ export class SurveyService {
 
   constructor(private http: HttpClient) {}
 
+  getAnswerAverage() {
+    return this.http.get<any>(
+      `${this.prefix}/3/average`
+    ).pipe(
+      map(value => value.average.map(v => ({...v, percentage: v.rate * 100}))),
+    );
+  }
+
   getQuestionsFromInstanceId(instanceId= '2') {
     return this.http.get(
       `${this.instancePrefix}/${instanceId}/question`

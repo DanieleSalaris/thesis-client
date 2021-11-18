@@ -1,0 +1,57 @@
+.root {
+    width: 100%;
+    margin: 50px 0;
+}
+
+.steps {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    overflow: visible;
+    z-index: 3;
+}
+.steps .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    height: 60px;
+    z-index: 3;
+}
+
+.steps .step.disabled {
+    opacity: 0.1
+}
+
+.steps .step.first {
+    transform: translateX(-50%);
+}
+
+.steps .step .label {
+    font-size: 14px;
+}
+
+.steps .step .vertical-bar {
+    width: 2px;
+    flex: 1;
+    background-color: #000;
+    opacity: 0.4;
+}
+
+.gradient {
+    opacity: 0.33;
+    width: 100%;
+    height: 20px;
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 1;
+}
+
+.percentage-bar {
+    height: 100%;
+    background-color: #fff;
+    opacity: 0.9;
+}

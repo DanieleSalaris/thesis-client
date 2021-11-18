@@ -1,0 +1,12 @@
+<div class="root">
+  <div
+    class="data-container"
+    *ngIf="!loadingData"
+  >
+    <app-data-visualization-row
+      *ngFor="let average of averages"
+      [percentage]="average.percentage"
+    ></app-data-visualization-row>
+  </div>
+  <mat-spinner *ngIf="loadingData"></mat-spinner>
+</div>
