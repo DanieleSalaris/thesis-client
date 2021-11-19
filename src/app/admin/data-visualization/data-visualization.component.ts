@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./data-visualization.component.css']
 })
 export class DataVisualizationComponent implements OnInit, OnDestroy {
-  averages: {questionId: string, rate: number, percentage: number}[];
+  averages: {questionId: string, rate: number, percentage: number, aspect: string}[];
   averagesSubscription: Subscription;
   loadingData = false;
 

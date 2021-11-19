@@ -3,10 +3,13 @@
     class="data-container"
     *ngIf="!loadingData"
   >
-    <app-data-visualization-row
-      *ngFor="let average of averages"
-      [percentage]="average.percentage"
-    ></app-data-visualization-row>
+    <div *ngFor="let average of averages">
+      <h1>
+        {{average.aspect}}
+      </h1>
+      <app-data-visualization-row [percentage]="average.percentage"></app-data-visualization-row>
+    </div>
+
   </div>
   <mat-spinner *ngIf="loadingData"></mat-spinner>
 </div>
