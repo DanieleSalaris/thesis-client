@@ -15,11 +15,13 @@ import {QuestionChoiceSliderComponent} from '@src/app/survey/question/question-c
 import {TodayInstanceComponent} from '@src/app/survey/instances/today-instance/today-instance.component';
 import {DataVisualizationComponent} from '@src/app/admin/data-visualization/data-visualization.component';
 import {DataVisualizationRowComponent} from '@src/app/admin/data-visualization/data-visualization-row/data-visualization-row.component';
+import {RoleRedirect} from '@src/app/auth/role-redirect/role-redirect';
 
 export const declarations = [
   AppComponent,
   HomeComponent,
   LoginComponent,
+  RoleRedirect,
   InstancesComponent,
   InstancesDummyComponent,
   InstanceComponent,

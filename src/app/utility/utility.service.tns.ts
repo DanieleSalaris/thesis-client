@@ -83,4 +83,12 @@ export class UtilityService {
 
     return notifications;
   }
+
+  isWeb() {
+    return false;
+  }
+
+  isMobile() {
+    return true;
+  }
 }

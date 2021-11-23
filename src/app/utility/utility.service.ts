@@ -18,4 +18,12 @@ export class UtilityService {
 
   }
 
+  isWeb() {
+    return true;
+  }
+
+  isMobile() {
+    return false;
+  }
+
 }

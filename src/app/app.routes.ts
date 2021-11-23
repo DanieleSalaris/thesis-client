@@ -4,11 +4,14 @@ import { HomeComponent } from '@src/app/home/home.component';
 import {QuestionComponent} from '@src/app/survey/question/question.component';
 import {InstancesComponent} from '@src/app/survey/instances/instances.component';
 import {LoginComponent} from '@src/app/auth/login/login.component';
-import {AuthGuard} from '@src/app/auth/auth.guard';
+import {AuthGuard} from '@src/app/auth/guards/auth.guard';
 import {QuestionContainerComponent} from '@src/app/survey/question-container/question-container.component';
 import {TodayInstanceComponent} from '@src/app/survey/instances/today-instance/today-instance.component';
 import {LoginGuard} from '@src/app/auth/login/login.guard';
 import {DataVisualizationComponent} from '@src/app/admin/data-visualization/data-visualization.component';
+import {AdminGuard} from '@src/app/auth/guards/admin.guard';
+import {UserGuard} from '@src/app/auth/guards/user.guard';
+import {RoleRedirect} from '@src/app/auth/role-redirect/role-redirect';
 
 export const routes: Routes = [
   {
@@ -17,7 +20,12 @@ export const routes: Routes = [
     canActivate: [LoginGuard]
   },
   {
+    path: 'role-redirect',
+    component: RoleRedirect,
+  },
+  {
     path: 'admin',
+    canActivate: [AuthGuard, AdminGuard],
     children: [
       {
         path: 'data-visualization',
@@ -32,7 +40,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, UserGuard],
     children: [
       {
           path: '',

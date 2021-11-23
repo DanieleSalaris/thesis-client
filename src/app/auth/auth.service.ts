@@ -36,14 +36,38 @@ export class AuthService {
   }
 
   validToken() {
-    const tokenJSON = this.tokenStorageService.readToken();
-    if (!tokenJSON) {
+    const token = this.getDecodedToken();
+
+    if (!token) {
       return false;
     }
 
-    const token = this.tokenStorageService.decodeToken(tokenJSON);
     const expireDate = new Date(token.exp * 1000);
     const now = new Date();
     return isAfter(expireDate, now);
+  }
+
+  getDecodedToken() {
+    const tokenJson = this.tokenStorageService.readToken();
+
+    if (!tokenJson) {
+      return null;
+    }
+
+    return this.tokenStorageService.decodeToken(tokenJson);
+  }
+
+  hasRoleUser() {
+    const token = this.getDecodedToken();
+    return token?.role === 'user' ?? false;
+  }
+
+  hasRoleAdmin() {
+    const token = this.getDecodedToken();
+    return token?.role === 'admin' ?? false;
+  }
+
+  clearToken() {
+    this.tokenStorageService.saveToken('');
   }
 }
