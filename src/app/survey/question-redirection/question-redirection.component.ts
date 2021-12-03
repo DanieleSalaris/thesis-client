@@ -6,9 +6,9 @@ import {Observable, of, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-question-container',
-  templateUrl: './question-container.component.html',
+  templateUrl: './question-redirection.component.html',
 })
-export class QuestionContainerComponent implements OnInit, OnDestroy {
+export class QuestionRedirectionComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(

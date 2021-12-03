@@ -10,7 +10,7 @@ import {InstancesComponent} from '@src/app/survey/instances/instances.component'
 import {InstancesDummyComponent} from '@src/app/survey/instances/instances-dummy/instances-dummy.component';
 import {InstanceComponent} from '@src/app/survey/instances/instance/instance.component';
 import {LoginComponent} from '@src/app/auth/login/login.component';
-import {QuestionContainerComponent} from '@src/app/survey/question-container/question-container.component';
+import {QuestionRedirectionComponent} from '@src/app/survey/question-redirection/question-redirection.component';
 import {QuestionChoiceSliderComponent} from '@src/app/survey/question/question-choice-slider/question-choice-slider.component';
 import {TodayInstanceComponent} from '@src/app/survey/instances/today-instance/today-instance.component';
 import {DataVisualizationComponent} from '@src/app/admin/data-visualization/data-visualization.component';
@@ -26,7 +26,7 @@ export const declarations = [
   InstancesDummyComponent,
   InstanceComponent,
   TodayInstanceComponent,
-  QuestionContainerComponent,
+  QuestionRedirectionComponent,
   QuestionComponent,
   QuestionDummyComponent,
   QuestionChoiceComponent,

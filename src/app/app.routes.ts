@@ -5,7 +5,7 @@ import {QuestionComponent} from '@src/app/survey/question/question.component';
 import {InstancesComponent} from '@src/app/survey/instances/instances.component';
 import {LoginComponent} from '@src/app/auth/login/login.component';
 import {AuthGuard} from '@src/app/auth/guards/auth.guard';
-import {QuestionContainerComponent} from '@src/app/survey/question-container/question-container.component';
+import {QuestionRedirectionComponent} from '@src/app/survey/question-redirection/question-redirection.component';
 import {TodayInstanceComponent} from '@src/app/survey/instances/today-instance/today-instance.component';
 import {LoginGuard} from '@src/app/auth/login/login.guard';
 import {DataVisualizationComponent} from '@src/app/admin/data-visualization/data-visualization.component';
@@ -59,7 +59,7 @@ export const routes: Routes = [
       },
       {
         path: 'instance/:instanceId',
-        component: QuestionContainerComponent,
+        component: QuestionRedirectionComponent,
         canActivate: [AuthGuard]
       },
       {
